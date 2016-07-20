@@ -6,6 +6,7 @@
 package Stb.model.Ref;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,15 +16,13 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author slim
+ * @author yayan
  */
 @Entity
-@Table(name = "devise")
-@XmlRootElement
+@Table(name = "DEVISE", catalog = "", schema = "REF")
 @NamedQueries({
     @NamedQuery(name = "Devise.findAll", query = "SELECT d FROM Devise d"),
     @NamedQuery(name = "Devise.findByCodeDevise", query = "SELECT d FROM Devise d WHERE d.codeDevise = :codeDevise"),
@@ -36,54 +35,55 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Devise.findByQuote", query = "SELECT d FROM Devise d WHERE d.quote = :quote"),
     @NamedQuery(name = "Devise.findByCodeIso", query = "SELECT d FROM Devise d WHERE d.codeIso = :codeIso")})
 public class Devise implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
     @NotNull
-    @Column(name = "CODE_DEVISE")
-    private Integer codeDevise;
+    @Column(name = "CODE_DEVISE", nullable = false)
+    private Short codeDevise;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 3)
-    @Column(name = "SIGLE_DEVISE")
+    @Column(name = "SIGLE_DEVISE", nullable = false, length = 3)
     private String sigleDevise;
     @Size(max = 35)
-    @Column(name = "LIB_DEVISE")
+    @Column(name = "LIB_DEVISE", length = 35)
     private String libDevise;
     @Column(name = "UNITE_DEVISE")
-    private Integer uniteDevise;
+    private Short uniteDevise;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
-    @Column(name = "COURS_FIXE")
-    private Double coursFixe;
+    @Column(name = "COURS_FIXE", precision = 10, scale = 6)
+    private BigDecimal coursFixe;
     @Column(name = "DECIMAL_DEVISE")
-    private Integer decimalDevise;
+    private Short decimalDevise;
     @Size(max = 10)
-    @Column(name = "SOUS_UNITE")
+    @Column(name = "SOUS_UNITE", length = 10)
     private String sousUnite;
     @Size(max = 1)
-    @Column(name = "QUOTE")
+    @Column(name = "QUOTE", length = 1)
     private String quote;
     @Size(max = 3)
-    @Column(name = "CODE_ISO")
+    @Column(name = "CODE_ISO", length = 3)
     private String codeIso;
 
     public Devise() {
     }
 
-    public Devise(Integer codeDevise) {
+    public Devise(Short codeDevise) {
         this.codeDevise = codeDevise;
     }
 
-    public Devise(Integer codeDevise, String sigleDevise) {
+    public Devise(Short codeDevise, String sigleDevise) {
         this.codeDevise = codeDevise;
         this.sigleDevise = sigleDevise;
     }
 
-    public Integer getCodeDevise() {
+    public Short getCodeDevise() {
         return codeDevise;
     }
 
-    public void setCodeDevise(Integer codeDevise) {
+    public void setCodeDevise(Short codeDevise) {
         this.codeDevise = codeDevise;
     }
 
@@ -103,27 +103,27 @@ public class Devise implements Serializable {
         this.libDevise = libDevise;
     }
 
-    public Integer getUniteDevise() {
+    public Short getUniteDevise() {
         return uniteDevise;
     }
 
-    public void setUniteDevise(Integer uniteDevise) {
+    public void setUniteDevise(Short uniteDevise) {
         this.uniteDevise = uniteDevise;
     }
 
-    public Double getCoursFixe() {
+    public BigDecimal getCoursFixe() {
         return coursFixe;
     }
 
-    public void setCoursFixe(Double coursFixe) {
+    public void setCoursFixe(BigDecimal coursFixe) {
         this.coursFixe = coursFixe;
     }
 
-    public Integer getDecimalDevise() {
+    public Short getDecimalDevise() {
         return decimalDevise;
     }
 
-    public void setDecimalDevise(Integer decimalDevise) {
+    public void setDecimalDevise(Short decimalDevise) {
         this.decimalDevise = decimalDevise;
     }
 
@@ -173,7 +173,7 @@ public class Devise implements Serializable {
 
     @Override
     public String toString() {
-        return "entity.Devise[ codeDevise=" + codeDevise + " ]";
+        return "Stb.model.Ref.Devise[ codeDevise=" + codeDevise + " ]";
     }
     
 }

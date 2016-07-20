@@ -13,35 +13,42 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author slim
+ * @author yayan
  */
 @Entity
-@Table(name = "AGENCE")
-@XmlRootElement
+@Table(name = "AGENCE", catalog = "", schema = "REF")
 @NamedQueries({
     @NamedQuery(name = "Agence.findAll", query = "SELECT a FROM Agence a"),
     @NamedQuery(name = "Agence.findByCodeBanque", query = "SELECT a FROM Agence a WHERE a.agencePK.codeBanque = :codeBanque"),
     @NamedQuery(name = "Agence.findByCodeAgenceBct", query = "SELECT a FROM Agence a WHERE a.agencePK.codeAgenceBct = :codeAgenceBct"),
     @NamedQuery(name = "Agence.findByLibAgence", query = "SELECT a FROM Agence a WHERE a.libAgence = :libAgence"),
     @NamedQuery(name = "Agence.findByAdresseAgence", query = "SELECT a FROM Agence a WHERE a.adresseAgence = :adresseAgence"),
-    @NamedQuery(name = "Agence.findByCodeAgenceBna", query = "SELECT a FROM Agence a WHERE a.codeAgenceBna = :codeAgenceBna")})
+    @NamedQuery(name = "Agence.findByIndicatifTel", query = "SELECT a FROM Agence a WHERE a.indicatifTel = :indicatifTel"),
+    @NamedQuery(name = "Agence.findByNumeroTel", query = "SELECT a FROM Agence a WHERE a.numeroTel = :numeroTel"),
+    @NamedQuery(name = "Agence.findByCodeAgenceBna", query = "SELECT a FROM Agence a WHERE a.codeAgenceBna = :codeAgenceBna"),
+    @NamedQuery(name = "Agence.findByNumAgent", query = "SELECT a FROM Agence a WHERE a.numAgent = :numAgent")})
 public class Agence implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @EmbeddedId
     protected AgencePK agencePK;
     @Size(max = 20)
-    @Column(name = "LIB_AGENCE")
+    @Column(name = "LIB_AGENCE", length = 20)
     private String libAgence;
     @Size(max = 30)
-    @Column(name = "ADRESSE_AGENCE")
+    @Column(name = "ADRESSE_AGENCE", length = 30)
     private String adresseAgence;
+    @Column(name = "INDICATIF_TEL")
+    private Short indicatifTel;
+    @Column(name = "NUMERO_TEL")
+    private Integer numeroTel;
     @Column(name = "CODE_AGENCE_BNA")
     private Short codeAgenceBna;
+    @Column(name = "NUM_AGENT")
+    private Integer numAgent;
 
     public Agence() {
     }
@@ -78,12 +85,36 @@ public class Agence implements Serializable {
         this.adresseAgence = adresseAgence;
     }
 
+    public Short getIndicatifTel() {
+        return indicatifTel;
+    }
+
+    public void setIndicatifTel(Short indicatifTel) {
+        this.indicatifTel = indicatifTel;
+    }
+
+    public Integer getNumeroTel() {
+        return numeroTel;
+    }
+
+    public void setNumeroTel(Integer numeroTel) {
+        this.numeroTel = numeroTel;
+    }
+
     public Short getCodeAgenceBna() {
         return codeAgenceBna;
     }
 
     public void setCodeAgenceBna(Short codeAgenceBna) {
         this.codeAgenceBna = codeAgenceBna;
+    }
+
+    public Integer getNumAgent() {
+        return numAgent;
+    }
+
+    public void setNumAgent(Integer numAgent) {
+        this.numAgent = numAgent;
     }
 
     @Override
@@ -108,7 +139,7 @@ public class Agence implements Serializable {
 
     @Override
     public String toString() {
-        return "services.beans.Ref.Agence[ agencePK=" + agencePK + " ]";
+        return "Stb.model.Ref.Agence[ agencePK=" + agencePK + " ]";
     }
     
 }

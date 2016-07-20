@@ -13,18 +13,18 @@ import javax.validation.constraints.NotNull;
 
 /**
  *
- * @author slim
+ * @author yayan
  */
 @Embeddable
 public class AgencePK implements Serializable {
 
     @Basic(optional = false)
     @NotNull
-    @Column(name = "CODE_BANQUE")
+    @Column(name = "CODE_BANQUE", nullable = false)
     private short codeBanque;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "CODE_AGENCE_BCT")
+    @Column(name = "CODE_AGENCE_BCT", nullable = false)
     private short codeAgenceBct;
 
     public AgencePK() {
@@ -77,7 +77,7 @@ public class AgencePK implements Serializable {
 
     @Override
     public String toString() {
-        return "services.beans.Ref.AgencePK[ codeBanque=" + codeBanque + ", codeAgenceBct=" + codeAgenceBct + " ]";
+        return "Stb.model.Ref.AgencePK[ codeBanque=" + codeBanque + ", codeAgenceBct=" + codeAgenceBct + " ]";
     }
     
 }

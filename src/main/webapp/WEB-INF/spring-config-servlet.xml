@@ -13,9 +13,10 @@
   http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd 
 
 ">
-
+<!-- Use @Component annotations for bean definitions -->
     <context:component-scan base-package="Stb"/>
-
+    
+<!-- Use @Controller annotations for MVC controller definitions -->
     <mvc:annotation-driven />
     <!--sec-->
     <bean id="dataSourceSec"  
@@ -52,12 +53,15 @@
             </props>
         </property>
     </bean>
+    
+    <!-- Add Transaction support -->
     <bean id="txManagerSec"
           class="org.springframework.orm.hibernate4.HibernateTransactionManager">
         <property name="sessionFactory" ref="sessionFactorySec" />
     </bean>
     
-    <tx:annotation-driven transaction-manager="txManagerSec"/>
+      <!-- Use @Transaction annotations for managing transactions -->
+      <tx:annotation-driven transaction-manager="txManagerSec"/>
    
     <bean id="SecDao" class="Stb.dao.SecDaoImpl" primary="true">
         <property name="sessionFactory" ref="sessionFactorySec" />
