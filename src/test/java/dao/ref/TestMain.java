@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Stb.dao.ref;
+package dao.ref;
 
 /**
  *
@@ -11,6 +11,7 @@ package Stb.dao.ref;
  */
 public class TestMain {
     public static void main(String args[]){
-        System.out.println("go plz é_è ");
+        
+        System.out.println("tes test");
     }
 }

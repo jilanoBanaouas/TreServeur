@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Stb.dao.ref;
+package Stb.service.ref;
 
 import Stb.model.Ref.TypeDossierAva;
 import java.util.List;
@@ -12,7 +12,7 @@ import java.util.List;
  *
  * @author yayan
  */
-public interface TypeDossierAvaDao {
+public interface TypeDossierAvaServices {
 
     public List<TypeDossierAva> getAllTypeDossierAva();
 

@@ -3,19 +3,19 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Stb.dao.ref;
+package Stb.service.ref;
 
-import Stb.model.Ref.TypeDossierAva;
+import Stb.model.Ref.Agence;
 import java.util.List;
 
 /**
  *
  * @author yayan
  */
-public interface TypeDossierAvaDao {
+public interface AgenceServices {
 
-    public List<TypeDossierAva> getAllTypeDossierAva();
+    public List<Agence> getAllAgence();
 
-    public TypeDossierAva getTypeDossierAva(Short codeTypeDosAva);
+    public Agence getAgence(short codeBanque, short codeAgenceBct);
 
 }
