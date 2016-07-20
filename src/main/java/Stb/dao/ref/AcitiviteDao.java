@@ -3,19 +3,21 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Stb.dao.ava;
+package Stb.dao.ref;
 
-import Stb.model.ava.Beneficiaires;
+import Stb.model.Ref.Activite;
 import java.util.List;
 
 /**
  *
  * @author yayan
  */
-public interface BeneficiairesDAO {
+public interface AcitiviteDao {
     
-    public Beneficiaires getBeneficiaires();//selon quoi
-            
-            public List<Beneficiaires> getAllBeneficiaires();
+      public List<Activite> getAllActivite();
+    
+    public Activite gteActivite(Integer codeActivite);
+    
+    //MéthodeRechercher à implementer
     
 }

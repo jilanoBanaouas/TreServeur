@@ -1,9 +1,9 @@
 package Stb.controller;
 
-import Stb.model.Ref.CoursJoursDeviseBb;
+//import Stb.model.Ref.CoursJoursDeviseBb;
+//import Stb.model.Ref.ModeDeLivraison;
+//import Stb.model.Ref.ModeDeReglement;
 import Stb.model.Ref.Devise;
-import Stb.model.Ref.ModeDeLivraison;
-import Stb.model.Ref.ModeDeReglement;
 import Stb.model.Ref.Pays;
 import Stb.services.RefServices;
 import java.util.List;
@@ -56,33 +56,33 @@ public class RefController {
         return liba;
     }
 
-    @RequestMapping(value = "/oneBanqueEtr", method = RequestMethod.GET)
-    public @ResponseBody
-    String oneBanqueEtr(@RequestParam(value = "codeBnqEtr") int codeBnqEtr) {
-        String libB = null;
-        try {
-
-            libB = refServices.oneBanqueEtr(codeBnqEtr);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return libB;
-    }
-
-    @RequestMapping(value = "/oneAgenceEtr", method = RequestMethod.GET)
-    public @ResponseBody
-    String oneAgenceEtr(@RequestParam(value = "codeAgenceEtr") int codeAgenceEtr, @RequestParam(value = "codeBnqEtr") int codeBnqEtr) {
-        String liba = null;
-        try {
-
-            liba = refServices.oneAgenceEtr(codeAgenceEtr, codeBnqEtr);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return liba;
-    }
+//    @RequestMapping(value = "/oneBanqueEtr", method = RequestMethod.GET)
+//    public @ResponseBody
+//    String oneBanqueEtr(@RequestParam(value = "codeBnqEtr") int codeBnqEtr) {
+//        String libB = null;
+//        try {
+//
+//            libB = refServices.oneBanqueEtr(codeBnqEtr);
+//
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//        return libB;
+//    }
+//
+//    @RequestMapping(value = "/oneAgenceEtr", method = RequestMethod.GET)
+//    public @ResponseBody
+//    String oneAgenceEtr(@RequestParam(value = "codeAgenceEtr") int codeAgenceEtr, @RequestParam(value = "codeBnqEtr") int codeBnqEtr) {
+//        String liba = null;
+//        try {
+//
+//            liba = refServices.oneAgenceEtr(codeAgenceEtr, codeBnqEtr);
+//
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//        return liba;
+//    }
 
     @RequestMapping(value = "/allDevise", method = RequestMethod.GET)
     public @ResponseBody
@@ -123,54 +123,54 @@ public class RefController {
         return Lpays;
     }
 
-    @RequestMapping(value = "/oneModeReglement", method = RequestMethod.GET)
-    public @ResponseBody
-    ModeDeReglement oneModeReglement(@RequestParam(value = "codeModReg") Integer codeModReg) {
-        ModeDeReglement mreg = null;
-        try {
-            mreg = refServices.oneModeReglement(codeModReg);
+//    @RequestMapping(value = "/oneModeReglement", method = RequestMethod.GET)
+//    public @ResponseBody
+//    ModeDeReglement oneModeReglement(@RequestParam(value = "codeModReg") Integer codeModReg) {
+//        ModeDeReglement mreg = null;
+//        try {
+//            mreg = refServices.oneModeReglement(codeModReg);
+//
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//        return mreg;
+//    }
 
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return mreg;
-    }
+//    @RequestMapping(value = "/allModeLivraison", method = RequestMethod.GET)
+//    public @ResponseBody
+//    List<ModeDeLivraison> allModeLivraison() {
+//        List<ModeDeLivraison> Lml = null;
+//        try {
+//            Lml = refServices.allModeLivraison();
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//        return Lml;
+//    }
 
-    @RequestMapping(value = "/allModeLivraison", method = RequestMethod.GET)
-    public @ResponseBody
-    List<ModeDeLivraison> allModeLivraison() {
-        List<ModeDeLivraison> Lml = null;
-        try {
-            Lml = refServices.allModeLivraison();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return Lml;
-    }
-
-    @RequestMapping(value = "/oneModeLivraison", method = RequestMethod.GET)
-    public @ResponseBody
-    ModeDeLivraison oneModeLivraison(@RequestParam(value = "codeModLiv") Integer codeModLiv) {
-        ModeDeLivraison ml = null;
-        try {
-            ml = refServices.oneModeLivraison(codeModLiv);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return ml;
-    }
-
-    @RequestMapping(value = "/coursJourDevise", method = RequestMethod.GET)
-    public @ResponseBody
-    CoursJoursDeviseBb coursJourDevise(@RequestParam(value = "codeDevise") Short codeDevise) {
-        CoursJoursDeviseBb cjbb = null;
-        try {
-            cjbb = refServices.coursJourDevise(codeDevise);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return cjbb;
-    }
+//    @RequestMapping(value = "/oneModeLivraison", method = RequestMethod.GET)
+//    public @ResponseBody
+//    ModeDeLivraison oneModeLivraison(@RequestParam(value = "codeModLiv") Integer codeModLiv) {
+//        ModeDeLivraison ml = null;
+//        try {
+//            ml = refServices.oneModeLivraison(codeModLiv);
+//
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//        return ml;
+//    }
+//
+//    @RequestMapping(value = "/coursJourDevise", method = RequestMethod.GET)
+//    public @ResponseBody
+//    CoursJoursDeviseBb coursJourDevise(@RequestParam(value = "codeDevise") Short codeDevise) {
+//        CoursJoursDeviseBb cjbb = null;
+//        try {
+//            cjbb = refServices.coursJourDevise(codeDevise);
+//
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//        return cjbb;
+//    }
 }

@@ -39,7 +39,7 @@ public class BeneficiaresMvtDaoImpl implements BeneficiairesMvtDao{
     }
 
     @Override
-    public BeneficiairesMvt getBeneficiairesMvt(Long id) {
+    public BeneficiairesMvt getBeneficiairesMvt(long id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

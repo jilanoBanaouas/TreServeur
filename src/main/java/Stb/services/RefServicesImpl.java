@@ -7,10 +7,10 @@ package Stb.services;
 
 import Stb.dao.RefDao;
 import Stb.model.Ref.Devise;
-import Stb.model.Ref.ModeDeLivraison;
 import Stb.model.Ref.Pays;
-import Stb.model.Ref.CoursJoursDeviseBb;
-import Stb.model.Ref.ModeDeReglement;
+//import Stb.model.Ref.ModeDeLivraison;
+//import Stb.model.Ref.CoursJoursDeviseBb;
+//import Stb.model.Ref.ModeDeReglement;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -33,15 +33,15 @@ public class RefServicesImpl implements RefServices {
         return refDao.oneAgence(codeAgenceBct, codeBanque);
     }
 
-    @Override
-    public String oneBanqueEtr(int codeBnqEtr) throws Exception {
-        return refDao.oneBanqueEtr(codeBnqEtr);
-    }
-
-    @Override
-    public String oneAgenceEtr(int codeAgenceEtr, int codeBanqueEtr) throws Exception {
-        return refDao.oneAgenceEtr(codeAgenceEtr, codeBanqueEtr);
-    }
+//    @Override
+//    public String oneBanqueEtr(int codeBnqEtr) throws Exception {
+//        return refDao.oneBanqueEtr(codeBnqEtr);
+//    }
+//
+//    @Override
+//    public String oneAgenceEtr(int codeAgenceEtr, int codeBanqueEtr) throws Exception {
+//        return refDao.oneAgenceEtr(codeAgenceEtr, codeBanqueEtr);
+//    }
 
     @Override
     public List<Devise> allDevise() throws Exception {
@@ -58,24 +58,24 @@ public class RefServicesImpl implements RefServices {
         return refDao.allPays();
     }
 
-    @Override
-    public ModeDeReglement oneModeReglement(Integer codeModReg) throws Exception {
-        return refDao.oneModeReglement(codeModReg);
-    }
-
-    @Override
-    public List<ModeDeLivraison> allModeLivraison() throws Exception {
-        return refDao.allModeLivraison();
-    }
-
-    @Override
-    public ModeDeLivraison oneModeLivraison(Integer codeModLiv) throws Exception {
-        return refDao.oneModeLivraison(codeModLiv);
-    }
-
-    @Override
-    public CoursJoursDeviseBb coursJourDevise(Short codeDevise) throws Exception {
-        return refDao.coursJourDevise(codeDevise);
-    }
+//    @Override
+//    public ModeDeReglement oneModeReglement(Integer codeModReg) throws Exception {
+//        return refDao.oneModeReglement(codeModReg);
+//    }
+//
+//    @Override
+//    public List<ModeDeLivraison> allModeLivraison() throws Exception {
+//        return refDao.allModeLivraison();
+//    }
+//
+//    @Override
+//    public ModeDeLivraison oneModeLivraison(Integer codeModLiv) throws Exception {
+//        return refDao.oneModeLivraison(codeModLiv);
+//    }
+//
+//    @Override
+//    public CoursJoursDeviseBb coursJourDevise(Short codeDevise) throws Exception {
+//        return refDao.coursJourDevise(codeDevise);
+//    }
 
 }

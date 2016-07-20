@@ -2,14 +2,14 @@ package Stb.dao;
 
 import Stb.model.Ref.Agence;
 import Stb.model.Ref.AgencePK;
-import Stb.model.Ref.AgenceEtrangere;
-import Stb.model.Ref.AgenceEtrangerePK;
+//import Stb.model.Ref.AgenceEtrangere;
+//import Stb.model.Ref.AgenceEtrangerePK;
 import Stb.model.Ref.Banque;
-import Stb.model.Ref.BanqueEtrangere;
-import Stb.model.Ref.CoursJoursDeviseBb;
+//import Stb.model.Ref.BanqueEtrangere;
+//import Stb.model.Ref.CoursJoursDeviseBb;
 import Stb.model.Ref.Devise;
-import Stb.model.Ref.ModeDeLivraison;
-import Stb.model.Ref.ModeDeReglement;
+//import Stb.model.Ref.ModeDeLivraison;
+//import Stb.model.Ref.ModeDeReglement;
 import Stb.model.Ref.Pays;
 import java.util.List;
 import org.hibernate.Query;
@@ -48,17 +48,17 @@ public class RefDaoImpl implements RefDao {
         return ((Agence) session.get(Agence.class, new AgencePK(codeBanque, codeAgenceBct))).getLibAgence();
     }
 
-    @Override
-    public String oneBanqueEtr(int codeBnqEtr) throws Exception {
-        session = sessionFactory.openSession();
-        return ((BanqueEtrangere) session.get(BanqueEtrangere.class, codeBnqEtr)).getLibLong();
-    }
-
-    @Override
-    public String oneAgenceEtr(int codeAgenceEtr, int codeBanqueEtr) throws Exception {
-        session = sessionFactory.openSession();
-        return ((AgenceEtrangere) session.get(AgenceEtrangere.class, new AgenceEtrangerePK(codeBanqueEtr, codeAgenceEtr))).getLibAgenceEtr();
-    }
+//    @Override
+//    public String oneBanqueEtr(int codeBnqEtr) throws Exception {
+//        session = sessionFactory.openSession();
+//        return ((BanqueEtrangere) session.get(BanqueEtrangere.class, codeBnqEtr)).getLibLong();
+//    }
+//
+//    @Override
+//    public String oneAgenceEtr(int codeAgenceEtr, int codeBanqueEtr) throws Exception {
+//        session = sessionFactory.openSession();
+//        return ((AgenceEtrangere) session.get(AgenceEtrangere.class, new AgenceEtrangerePK(codeBanqueEtr, codeAgenceEtr))).getLibAgenceEtr();
+//    }
 
     @Override
     public List<Devise> allDevise() {
@@ -81,30 +81,30 @@ public class RefDaoImpl implements RefDao {
         return query.list();
 
     }
-
-    @Override
-    public ModeDeReglement oneModeReglement(Integer codeModReg) throws Exception {
-        session = sessionFactory.openSession();
-        return ((ModeDeReglement) session.get(ModeDeReglement.class, codeModReg));
-    }
-
-    @Override
-    public List<ModeDeLivraison> allModeLivraison() throws Exception {
-        session = sessionFactory.openSession();
-        Query query = session.getNamedQuery("ModeDeLivraison.findAll");
-        return query.list();
-    }
-
-    @Override
-    public ModeDeLivraison oneModeLivraison(Integer codeModLiv) throws Exception {
-        session = sessionFactory.openSession();
-        return ((ModeDeLivraison) session.get(ModeDeLivraison.class, codeModLiv));
-    }
-
-    @Override
-    public CoursJoursDeviseBb coursJourDevise(Short codeDevise) throws Exception {
-        session = sessionFactory.openSession();
-        Query query = session.getNamedQuery("CoursJoursDeviseBb.findByCodeDevise").setParameter("codeDevise", codeDevise);
-        return (CoursJoursDeviseBb) query.uniqueResult();
-    }
+//
+//    @Override
+//    public ModeDeReglement oneModeReglement(Integer codeModReg) throws Exception {
+//        session = sessionFactory.openSession();
+//        return ((ModeDeReglement) session.get(ModeDeReglement.class, codeModReg));
+//    }
+//
+//    @Override
+//    public List<ModeDeLivraison> allModeLivraison() throws Exception {
+//        session = sessionFactory.openSession();
+//        Query query = session.getNamedQuery("ModeDeLivraison.findAll");
+//        return query.list();
+//    }
+//
+//    @Override
+//    public ModeDeLivraison oneModeLivraison(Integer codeModLiv) throws Exception {
+//        session = sessionFactory.openSession();
+//        return ((ModeDeLivraison) session.get(ModeDeLivraison.class, codeModLiv));
+//    }
+//
+//    @Override
+//    public CoursJoursDeviseBb coursJourDevise(Short codeDevise) throws Exception {
+//        session = sessionFactory.openSession();
+//        Query query = session.getNamedQuery("CoursJoursDeviseBb.findByCodeDevise").setParameter("codeDevise", codeDevise);
+//        return (CoursJoursDeviseBb) query.uniqueResult();
+//    }
 }

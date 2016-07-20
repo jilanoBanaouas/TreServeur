@@ -6,7 +6,7 @@
 package Stb.model.Domi;
 import Stb.model.Domi.Apurement;
 import Stb.model.Domi.ApurementPK;
-import Stb.model.Ref.Titre;
+//import Stb.model.Ref.Titre;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Column;
