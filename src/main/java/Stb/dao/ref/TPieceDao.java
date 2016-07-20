@@ -16,6 +16,6 @@ public interface TPieceDao {
     
      public List<TPiece> getAllTPiece();
     
-    public TPiece gteTPiece(Short codeTypePiece);
+    public TPiece getTPiece(Short codeTypePiece);
     
 }

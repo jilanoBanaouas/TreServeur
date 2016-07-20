@@ -5,17 +5,12 @@
  */
 package Stb.dao.ref;
 
-import Stb.model.Ref.Agence;
-import java.util.List;
-
 /**
  *
  * @author yayan
  */
-public interface AgenceDao {
-    
-    public List<Agence> getAllAgence();
-    
-    public Agence getAgence(short codeBanque , short codeAgenceBct);
-    
+public class TestMain {
+    public static void main(String args[]){
+        System.out.println("go plz é_è ");
+    }
 }

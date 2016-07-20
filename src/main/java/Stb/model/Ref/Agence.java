@@ -29,7 +29,8 @@ import javax.validation.constraints.Size;
     @NamedQuery(name = "Agence.findByIndicatifTel", query = "SELECT a FROM Agence a WHERE a.indicatifTel = :indicatifTel"),
     @NamedQuery(name = "Agence.findByNumeroTel", query = "SELECT a FROM Agence a WHERE a.numeroTel = :numeroTel"),
     @NamedQuery(name = "Agence.findByCodeAgenceBna", query = "SELECT a FROM Agence a WHERE a.codeAgenceBna = :codeAgenceBna"),
-    @NamedQuery(name = "Agence.findByNumAgent", query = "SELECT a FROM Agence a WHERE a.numAgent = :numAgent")})
+    @NamedQuery(name = "Agence.findByNumAgent", query = "SELECT a FROM Agence a WHERE a.numAgent = :numAgent"),
+    @NamedQuery(name = "Agence.findByCodeBanqueAndCodeAgence", query = "SELECT a FROM Agence a WHERE a.agencePK.codeBanque = :codeBanque AND a.agencePK.codeAgenceBct = :codeAgenceBct")})
 public class Agence implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -141,5 +142,5 @@ public class Agence implements Serializable {
     public String toString() {
         return "Stb.model.Ref.Agence[ agencePK=" + agencePK + " ]";
     }
-    
+
 }

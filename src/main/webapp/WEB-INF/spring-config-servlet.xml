@@ -13,10 +13,10 @@
   http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd 
 
 ">
-<!-- Use @Component annotations for bean definitions -->
+    <!-- Use @Component annotations for bean definitions -->
     <context:component-scan base-package="Stb"/>
     
-<!-- Use @Controller annotations for MVC controller definitions -->
+    <!-- Use @Controller annotations for MVC controller definitions -->
     <mvc:annotation-driven />
     <!--sec-->
     <bean id="dataSourceSec"  
@@ -38,7 +38,7 @@
                 <value>Stb.model.Sec.Abonnement</value>
                 <value>Stb.model.Sec.Operation</value> 
                 <value>Stb.model.Sec.ProduitService</value>  
-                  <value>Stb.model.Sec.Role</value>
+                <value>Stb.model.Sec.Role</value>
                 <value>Stb.model.Sec.UserStatus</value>    
                 <value>Stb.model.Sec.Users</value>                 
             </list>
@@ -60,8 +60,8 @@
         <property name="sessionFactory" ref="sessionFactorySec" />
     </bean>
     
-      <!-- Use @Transaction annotations for managing transactions -->
-      <tx:annotation-driven transaction-manager="txManagerSec"/>
+    <!-- Use @Transaction annotations for managing transactions -->
+    <tx:annotation-driven transaction-manager="txManagerSec"/>
    
     <bean id="SecDao" class="Stb.dao.SecDaoImpl" primary="true">
         <property name="sessionFactory" ref="sessionFactorySec" />
@@ -70,6 +70,60 @@
      
     <bean id="SecServices" class="Stb.services.SecServicesImpl"></bean>
     
+    <!--************ REF ************-->
+    <bean id="dataSourceRef"  
+          class="org.springframework.jdbc.datasource.DriverManagerDataSource">  
+        <property name="driverClassName" value="oracle.jdbc.OracleDriver" />  
+        <property name="url" value="jdbc:oracle:thin:@localhost:1521:XE" />  
+        <property name="username" value="ref" />  
+        <property name="password" value="ref" /> 
+    
+        
+    </bean> 
+    
+    
+    <bean id="sessionFactoryRef" primary="true"
+          class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+        <property name="dataSource" ref="dataSourceRef" />
+        <property name="annotatedClasses">
+            <list>
+                <value>Stb.model.Ref.Activite</value>
+                <value>Stb.model.Ref.Agence</value>
+                <value>Stb.model.Ref.Banque</value> 
+                <value>Stb.model.Ref.Devise</value>  
+                <value>Stb.model.Ref.ModePaiement</value>
+                <value>Stb.model.Ref.Pays</value>    
+                <value>Stb.model.Ref.TPiece</value>    
+                <value>Stb.model.Ref.TypeDossierAva</value>    
+                             
+            </list>
+        </property>
+        <property name="hibernateProperties">
+            <props>
+                <prop key="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</prop>
+                <prop key="hibernate.show_sql">${hibernate.show_sql}</prop>
+                <prop key="hibernate.format_sql">${hibernate.format_sql:false}</prop>
+                <prop key="hibernate.current_session_context_class">thread</prop>
+ 
+            </props>
+        </property>
+    </bean>
+    
+     <!-- Add Transaction support -->
+    <bean id="txManagerRef"
+          class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+        <property name="sessionFactory" ref="sessionFactoryRef" />
+    </bean>
+    
+     <!-- Use @Transaction annotations for managing transactions -->
+    <tx:annotation-driven transaction-manager="txManagerRef"/>
+   
+    <bean id="SecDao" class="Stb.dao.SecDaoImpl" primary="true">
+        <property name="sessionFactory" ref="sessionFactorySec" />
+    </bean>
+    
+     
+    <bean id="SecServices" class="Stb.services.SecServicesImpl"></bean>
     
     <!--Gen-->
     <bean id="dataSourceGen"  
@@ -113,7 +167,7 @@
         <property name="sessionFactory" ref="sessionFactoryGen" />
     </bean>
     
-      <bean id="GenDao" class="Stb.dao.GenDaoImpl" primary="true">
+    <bean id="GenDao" class="Stb.dao.GenDaoImpl" primary="true">
         <property name="sessionFactory" ref="sessionFactoryGen" />
     </bean>
     
@@ -143,7 +197,7 @@
                 <value>Stb.model.Domi.EmargementReglementTitre</value>
                 <value>Stb.model.Domi.StatCaParMois</value>
                 <value>Stb.model.Domi.VueTimeline</value>
-                 <value>Stb.model.Ref.Titre</value> 
+                <value>Stb.model.Ref.Titre</value> 
                 <value>Stb.model.Domi.Apurement</value>   
                  
             </list>
@@ -223,18 +277,18 @@
         <property name="dataSource" ref="dataSourceRef" />
         <property name="annotatedClasses">
             <list>
-            <value>Stb.model.Ref.Agence             </value>    
-            <value>Stb.model.Ref.AgenceEtrangere    </value>  
-            <value>Stb.model.Ref.Banque             </value> 
-            <value>Stb.model.Ref.BanqueEtrangere    </value>
-            <value>Stb.model.Ref.CoursJoursDeviseBb </value>
-            <value>Stb.model.Ref.Devise             </value>    
-            <value>Stb.model.Ref.ModeDeLivraison    </value>
-            <value>Stb.model.Ref.ModeDeReglement    </value>
-            <value>Stb.model.Ref.Titre   </value>
-            <value>Stb.model.Ref.Pays               </value>
-            <value>Stb.model.Ref.ModeDeReglement  </value>
-            <value>Stb.model.Ref.CoursJoursDeviseBb</value>   
+                <value>Stb.model.Ref.Agence             </value>    
+                <value>Stb.model.Ref.AgenceEtrangere    </value>  
+                <value>Stb.model.Ref.Banque             </value> 
+                <value>Stb.model.Ref.BanqueEtrangere    </value>
+                <value>Stb.model.Ref.CoursJoursDeviseBb </value>
+                <value>Stb.model.Ref.Devise             </value>    
+                <value>Stb.model.Ref.ModeDeLivraison    </value>
+                <value>Stb.model.Ref.ModeDeReglement    </value>
+                <value>Stb.model.Ref.Titre   </value>
+                <value>Stb.model.Ref.Pays               </value>
+                <value>Stb.model.Ref.ModeDeReglement  </value>
+                <value>Stb.model.Ref.CoursJoursDeviseBb</value>   
                                     
             </list>
         </property>

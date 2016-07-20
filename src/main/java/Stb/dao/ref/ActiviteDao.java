@@ -12,12 +12,11 @@ import java.util.List;
  *
  * @author yayan
  */
-public interface AcitiviteDao {
-    
-      public List<Activite> getAllActivite();
-    
-    public Activite gteActivite(Integer codeActivite);
-    
+public interface ActiviteDao {
+
+    public List<Activite> getAllActivite();
+
+    public Activite getActivite(Integer codeActivite);
+
     //MéthodeRechercher à implementer
-    
 }

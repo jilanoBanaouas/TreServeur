@@ -13,9 +13,9 @@ import java.util.List;
  * @author yayan
  */
 public interface TypeDossierAvaDao {
-    
+
     public List<TypeDossierAva> getAllTypeDossierAva();
-    
-    public TypeDossierAva gteTypeDossierAva(Short codeTypeDosAva);
-    
+
+    public TypeDossierAva getTypeDossierAva(Short codeTypeDosAva);
+
 }
