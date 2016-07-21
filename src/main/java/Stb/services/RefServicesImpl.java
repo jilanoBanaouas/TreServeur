@@ -6,18 +6,25 @@
 package Stb.services;
 
 import Stb.dao.RefDao;
+import Stb.model.Ref.Activite;
+import Stb.model.Ref.Agence;
 import Stb.model.Ref.Devise;
 import Stb.model.Ref.Pays;
+import Stb.model.Ref.TPiece;
+import Stb.model.Ref.TypeDossierAva;
 //import Stb.model.Ref.ModeDeLivraison;
 //import Stb.model.Ref.CoursJoursDeviseBb;
 //import Stb.model.Ref.ModeDeReglement;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
  * @author slim
  */
+
+@Transactional("txManagerRef")
 public class RefServicesImpl implements RefServices {
 
     @Autowired
@@ -42,7 +49,6 @@ public class RefServicesImpl implements RefServices {
 //    public String oneAgenceEtr(int codeAgenceEtr, int codeBanqueEtr) throws Exception {
 //        return refDao.oneAgenceEtr(codeAgenceEtr, codeBanqueEtr);
 //    }
-
     @Override
     public List<Devise> allDevise() throws Exception {
         return refDao.allDevise();
@@ -77,5 +83,45 @@ public class RefServicesImpl implements RefServices {
 //    public CoursJoursDeviseBb coursJourDevise(Short codeDevise) throws Exception {
 //        return refDao.coursJourDevise(codeDevise);
 //    }
+    //MAJ
+    @Override
+    public List<Activite> getAllActivite() {
+        return refDao.getAllActivite();
+    }
+
+    @Override
+    public Activite getActivite(Integer codeActivite) {
+        return refDao.getActivite(codeActivite);
+    }
+
+    @Override
+    public List<Agence> getAllAgence() {
+        return refDao.getAllAgence();
+    }
+
+    @Override
+    public Agence getAgence(short codeBanque, short codeAgenceBct) {
+        return refDao.getAgence(codeBanque, codeAgenceBct);
+    }
+
+    @Override
+    public List<TPiece> getAllTPiece() {
+        return refDao.getAllTPiece();
+    }
+
+    @Override
+    public TPiece getTPiece(Short codeTypePiece) {
+        return refDao.getTPiece(codeTypePiece);
+    }
+
+    @Override
+    public List<TypeDossierAva> getAllTypeDossierAva() {
+        return refDao.getAllTypeDossierAva();
+    }
+
+    @Override
+    public TypeDossierAva getTypeDossierAva(Short codeTypeDosAva) {
+        return refDao.getTypeDossierAva(codeTypeDosAva);
+    }
 
 }

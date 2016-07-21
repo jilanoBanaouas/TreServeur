@@ -25,8 +25,6 @@
         <property name="url" value="jdbc:oracle:thin:@localhost:1521:XE" />  
         <property name="username" value="Securite" />  
         <property name="password" value="sec" /> 
-    
-        
     </bean>  
  
     <bean id="sessionFactorySec" primary="true"
@@ -57,7 +55,7 @@
     <!-- Add Transaction support -->
     <bean id="txManagerSec"
           class="org.springframework.orm.hibernate4.HibernateTransactionManager">
-        <property name="sessionFactory" ref="sessionFactorySec" />
+        <property name="txManagerRef" ref="sessionFactorySec" />
     </bean>
     
     <!-- Use @Transaction annotations for managing transactions -->
@@ -76,9 +74,7 @@
         <property name="driverClassName" value="oracle.jdbc.OracleDriver" />  
         <property name="url" value="jdbc:oracle:thin:@localhost:1521:XE" />  
         <property name="username" value="ref" />  
-        <property name="password" value="ref" /> 
-    
-        
+        <property name="password" value="ref" />        
     </bean> 
     
     
@@ -109,22 +105,21 @@
         </property>
     </bean>
     
-     <!-- Add Transaction support -->
+    <!-- Add Transaction support -->
     <bean id="txManagerRef"
           class="org.springframework.orm.hibernate4.HibernateTransactionManager">
         <property name="sessionFactory" ref="sessionFactoryRef" />
     </bean>
     
-     <!-- Use @Transaction annotations for managing transactions -->
+    <!-- Use @Transaction annotations for managing transactions -->
     <tx:annotation-driven transaction-manager="txManagerRef"/>
    
-<!--  ***************** à remplaer par mes dao
-  <bean id="SecDao" class="Stb.dao.SecDaoImpl" primary="true">
-        <property name="sessionFactory" ref="sessionFactorySec" />
-    </bean>-->
-    
-     
-    <bean id="SecServices" class="Stb.services.SecServicesImpl"></bean>
+       <bean id="RefDao" class="Stb.dao.RefDaoImpl">
+        <property name="sessionFactory" ref="sessionFactoryRef" />
+    </bean>
+         
+    <bean id="RefServices" class="Stb.services.RefServicesImpl"></bean>
+    <!--    <bean id="SecServices" class="Stb.services.SecServicesImpl"></bean>-->
     
     <!--Gen-->
     <bean id="dataSourceGen"  
@@ -262,61 +257,7 @@
     <bean id="CdiServices" class="Stb.services.CdiServicesImpl"></bean>  
      
     <tx:annotation-driven transaction-manager="txManagerCdi"/>
-
-
-    <!--REF-->
-    <bean id="dataSourceRef"  
-          class="org.springframework.jdbc.datasource.DriverManagerDataSource">  
-        <property name="driverClassName" value="oracle.jdbc.OracleDriver" />  
-        <property name="url" value="jdbc:oracle:thin:@localhost:1521:XE" />  
-        <property name="username" value="ref" />  
-        <property name="password" value="ref" />  
-    </bean>  
+ 
   
-    <bean id="sessionFactoryRef" primary="true"
-          class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
-        <property name="dataSource" ref="dataSourceRef" />
-        <property name="annotatedClasses">
-            <list>
-                <value>Stb.model.Ref.Agence             </value>    
-                <value>Stb.model.Ref.AgenceEtrangere    </value>  
-                <value>Stb.model.Ref.Banque             </value> 
-                <value>Stb.model.Ref.BanqueEtrangere    </value>
-                <value>Stb.model.Ref.CoursJoursDeviseBb </value>
-                <value>Stb.model.Ref.Devise             </value>    
-                <value>Stb.model.Ref.ModeDeLivraison    </value>
-                <value>Stb.model.Ref.ModeDeReglement    </value>
-                <value>Stb.model.Ref.Titre   </value>
-                <value>Stb.model.Ref.Pays               </value>
-                <value>Stb.model.Ref.ModeDeReglement  </value>
-                <value>Stb.model.Ref.CoursJoursDeviseBb</value>   
-                                    
-            </list>
-        </property>
-        <property name="hibernateProperties">
-            <props>
-                <prop key="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</prop>
-                <prop key="hibernate.show_sql">${hibernate.show_sql}</prop>
-                <prop key="hibernate.current_session_context_class">thread</prop>
-            </props>
-        </property>
-    </bean>
-    
-    <bean id="txManagerRef"
-          class="org.springframework.orm.hibernate4.HibernateTransactionManager">
-        <property name="sessionFactory" ref="sessionFactoryRef" />
-    </bean>
-    
-    <tx:annotation-driven transaction-manager="txManagerRef"/>
-    
-    <bean id="RefDao" class="Stb.dao.RefDaoImpl">
-        <property name="sessionFactory" ref="sessionFactoryRef" />
-    </bean>
-         
-    <bean id="RefServices" class="Stb.services.RefServicesImpl"></bean>
-    
-    
-    
-    
     <mvc:default-servlet-handler/>
 </beans>
