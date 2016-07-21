@@ -1,29 +1,63 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package controller.ref;
 
-import Stb.model.Ref.Activite;
-import org.springframework.web.client.RestTemplate;
+import Stb.controller.RefController;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.http.MediaType;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.web.WebAppConfiguration;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.web.context.WebApplicationContext;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
-/**
- *
- * @author yayan
- */
+
+
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations = {"file:src/main/webapp/WEB-INF/spring-config-servlet.xml"})
+@WebAppConfiguration
 public class ClientControllerRefTest {
-    	public static final String REST_SERVICE_URI = "http://localhost:9090/AppServerAVA";
-        
-        public static void getActivite(){
-		 RestTemplate res = new RestTemplate();
-		          Activite activite = res.getForObject(REST_SERVICE_URI+"/ref/oneActivite", Activite.class);
-            System.out.println("--------------------"+activite.getLibActivite());
-	}
-        
-          public static void main(String args[]){
-        getActivite();
-
+	
+	@Autowired
+    private WebApplicationContext ctx;
+ 
+    private MockMvc mockMvc;
+ 
+    @Before
+    public void setUp() {
+        this.mockMvc = MockMvcBuilders.webAppContextSetup(ctx).build();
     }
     
+    @Configuration
+    @EnableWebMvc
+    public static class TestConfiguration {
+ 
+        @Bean
+        public RefController refController() {
+            return new RefController();
+        }
+ 
+    }
+    
+    @Test
+    public void activite() throws Exception {
+        Integer id = 1;
+        mockMvc.perform(get("/ref/oneActivite?codeAgenceBct=1").accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType("application/json;charset=UTF-8"))
+                .andExpect(jsonPath("$.libelle").value("exemple"));
+    }
+
+    
+
 }

@@ -52,20 +52,20 @@
     </bean>
     
     <!-- Add Transaction support ********************************************-->
-    <!--    <bean id="txManagerAVA"
-          class="org.springframework.orm.hibernate4.HibernateTransactionManager">
-        <property name="txManagerred" ref="sessionFactoryAVA" />
-    </bean>-->
+    <bean id="txManagerAVA"
+              class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+        <property name="txManagerred" ref="sessionFactoryRef" />
+    </bean>
     
     <!-- Use @Transaction annotations for managing transactions -->
-    <!--    <tx:annotation-driven transaction-manager="txManagerSec"/>-->
+    <tx:annotation-driven transaction-manager="txManagerAVA"/>
    
     <bean id="AVADao" class="Stb.dao.AVAdaoImpl" primary="true">
         <property name="sessionFactory" ref="sessionFactoryAVA" />
     </bean>
     
      
-    <!--    <bean id="SecServices" class="Stb.services.SecServicesImpl"></bean>-->
+<!--    <bean id="AvaServices" class="Stb.services.AvaServicesImpl"></bean>-->
     
     
     <!--sec-->
@@ -171,7 +171,7 @@
     <bean id="RefServices" class="Stb.services.RefServicesImpl"></bean>
     <!--    <bean id="SecServices" class="Stb.services.SecServicesImpl"></bean>-->
     
-    <!--Gen-->
+<!--    Gen-->
     <bean id="dataSourceGen"  
           class="org.springframework.jdbc.datasource.DriverManagerDataSource">  
         <property name="driverClassName" value="oracle.jdbc.OracleDriver" />  
@@ -222,7 +222,7 @@
     <tx:annotation-driven transaction-manager="txManagerGen"/>
 
     
-    <!--Domi-->
+<!--    Domi-->
     <bean id="dataSourceDomi"  
           class="org.springframework.jdbc.datasource.DriverManagerDataSource">  
         <property name="driverClassName" value="oracle.jdbc.OracleDriver" />  
@@ -267,7 +267,7 @@
     <bean id="DomiServices" class="Stb.services.DomiServicesImpl"></bean>
     
     <tx:annotation-driven transaction-manager="txManagerdomi"/>
-    <!--CDI-->
+<!--    CDI-->
     <bean id="dataSourceCdi"  
           class="org.springframework.jdbc.datasource.DriverManagerDataSource">  
         <property name="driverClassName" value="oracle.jdbc.OracleDriver" />  
