@@ -29,15 +29,6 @@ public class RefDaoImpl implements RefDao {
 
     private Session session;
 
-    public SessionFactory getSessionFactory() {
-        return sessionFactory;
-    }
-
-    public void setSessionFactory(SessionFactory sessionFactory) {
-        this.sessionFactory = sessionFactory;
-        session = sessionFactory.openSession();
-    }
-
     @Override
     public String oneBanque(Short codeBanque) throws Exception {
         session = sessionFactory.openSession();

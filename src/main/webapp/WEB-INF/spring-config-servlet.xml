@@ -18,6 +18,56 @@
     
     <!-- Use @Controller annotations for MVC controller definitions -->
     <mvc:annotation-driven />
+    
+    <!-- AVA -->
+    <bean id="dataSourceAVA"  
+          class="org.springframework.jdbc.datasource.DriverManagerDataSource">  
+        <property name="driverClassName" value="oracle.jdbc.OracleDriver" />  
+        <property name="url" value="jdbc:oracle:thin:@localhost:1521:XE" />  
+        <property name="username" value="ava" />  
+        <property name="password" value="ava" /> 
+    </bean> 
+    
+    <bean id="sessionFactoryAVA" primary="true"
+          class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+        <property name="dataSource" ref="dataSourceSec" />
+        <property name="annotatedClasses">
+            <list>
+                <value>Stb.model.ava.Beneficiaires</value>
+                <value>Stb.model.ava.BeneficiairesMvt</value>
+                <value>Stb.model.ava.OperationsDeleguees</value>  
+                <value>Stb.model.ava.OperationsDelegueesMvt</value>
+                                
+            </list>
+        </property>
+        <property name="hibernateProperties">
+            <props>
+                <prop key="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</prop>
+                <prop key="hibernate.show_sql">${hibernate.show_sql}</prop>
+                <prop key="hibernate.format_sql">${hibernate.format_sql:false}</prop>
+                <prop key="hibernate.current_session_context_class">thread</prop>
+ 
+            </props>
+        </property>
+    </bean>
+    
+    <!-- Add Transaction support ********************************************-->
+    <!--    <bean id="txManagerAVA"
+          class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+        <property name="txManagerred" ref="sessionFactoryAVA" />
+    </bean>-->
+    
+    <!-- Use @Transaction annotations for managing transactions -->
+    <!--    <tx:annotation-driven transaction-manager="txManagerSec"/>-->
+   
+    <bean id="AVADao" class="Stb.dao.AVAdaoImpl" primary="true">
+        <property name="sessionFactory" ref="sessionFactoryAVA" />
+    </bean>
+    
+     
+    <!--    <bean id="SecServices" class="Stb.services.SecServicesImpl"></bean>-->
+    
+    
     <!--sec-->
     <bean id="dataSourceSec"  
           class="org.springframework.jdbc.datasource.DriverManagerDataSource">  
@@ -114,7 +164,7 @@
     <!-- Use @Transaction annotations for managing transactions -->
     <tx:annotation-driven transaction-manager="txManagerRef"/>
    
-       <bean id="RefDao" class="Stb.dao.RefDaoImpl">
+    <bean id="RefDao" class="Stb.dao.RefDaoImpl">
         <property name="sessionFactory" ref="sessionFactoryRef" />
     </bean>
          
