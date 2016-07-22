@@ -30,7 +30,7 @@
     
     <bean id="sessionFactoryAVA" primary="true"
           class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
-        <property name="dataSource" ref="dataSourceSec" />
+        <property name="dataSource" ref="dataSourceAVA" />
         <property name="annotatedClasses">
             <list>
                 <value>Stb.model.ava.Beneficiaires</value>
@@ -65,7 +65,7 @@
     </bean>
     
      
-<!--    <bean id="AvaServices" class="Stb.services.AvaServicesImpl"></bean>-->
+    <bean id="AVAServices" class="Stb.services.AVAServicesImpl"></bean>
     
     
     <!--sec-->
@@ -268,7 +268,7 @@
     
     <tx:annotation-driven transaction-manager="txManagerdomi"/>
 <!--    CDI-->
-    <bean id="dataSourceCdi"  
+<!--    <bean id="dataSourceCdi"  
           class="org.springframework.jdbc.datasource.DriverManagerDataSource">  
         <property name="driverClassName" value="oracle.jdbc.OracleDriver" />  
         <property name="url" value="jdbc:oracle:thin:@localhost:1521:XE" />  
@@ -307,7 +307,7 @@
     <bean id="CdiServices" class="Stb.services.CdiServicesImpl"></bean>  
      
     <tx:annotation-driven transaction-manager="txManagerCdi"/>
- 
+ -->
   
     <mvc:default-servlet-handler/>
 </beans>

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Stb.dao;
+package Stb.services;
 
 import Stb.model.ava.Beneficiaires;
 import Stb.model.ava.BeneficiairesMvt;
@@ -19,18 +19,16 @@ import java.util.List;
  *
  * @author yayan
  */
-public interface AVADao {
+public interface AVAServices {
 
     // Beneficiaires
-    
-    //    public void insertBeneficiaires(Beneficiaires beneficiaires);
     public Beneficiaires getBeneficiaires(BeneficiairesPK beneficiairesPK);
+//    public void insertBeneficiaires(Beneficiaires beneficiaires);
+
     public List<Beneficiaires> getAllBeneficiaires();
 
-    //OperationsDeleguees
-    
-    //    public void insertOperationsDeleguees(OperationsDeleguees operationsDeleguees);
     public OperationsDeleguees getOperationsDeleguees(OperationsDelegueesPK operationsDelegueesPK);
+
     public List<OperationsDeleguees> getAllOperationsDeleguees();
 
 //    BeneficiaresMvt
@@ -41,6 +39,8 @@ public interface AVADao {
     public BeneficiairesMvt getBeneficiairesMvt(BeneficiairesMvtPK beneficiairesMvtPK);
 
     public void updateBeneficiairesMvt(BeneficiairesMvt beneficiairesMvt);
+
+    public void insertListBeneficairesMvt(List<BeneficiairesMvt> listesBeneficiairesMvt);
 
 //  OperationsDéléguéesMVT
     public void insertOperationsDelegueesMvt(OperationsDelegueesMvt operationsDelegueesMvt);
