@@ -9,7 +9,7 @@
 
     <name>AppServerAVA</name>
 
-<properties>
+    <properties>
         <springframework.version>4.0.5.RELEASE</springframework.version>
         <hibernate.version>4.3.5.Final</hibernate.version>
         <log4j.version>1.2.17</log4j.version>
@@ -24,8 +24,9 @@
                 <configuration>
                     <source>${jdk.version}</source>
                     <target>${jdk.version}</target>
-                <proc>none</proc>
+                    <proc>none</proc>
                 </configuration>
+                <version>2.3.2</version>
                 
       
     
@@ -35,10 +36,10 @@
     <dependencies>
         <!--spring-->
         <dependency>
-    <groupId>org.jboss.resteasy</groupId>
-    <artifactId>resteasy-jackson-provider</artifactId>
-    <version>2.3.4.Final</version>
-   </dependency>
+            <groupId>org.jboss.resteasy</groupId>
+            <artifactId>resteasy-jackson-provider</artifactId>
+            <version>2.3.4.Final</version>
+        </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-aop</artifactId>
@@ -141,7 +142,7 @@
             <version>${springframework.version}</version>
         </dependency>  
             
-          <dependency>
+        <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-core</artifactId>
             <version>3.1.3.RELEASE</version>
@@ -180,12 +181,17 @@
             <version>2.5.2</version>
             <scope>provided</scope>
         </dependency>
+       
+       
+		
+        <!-- ORACLE database driver -->
         <dependency>
-            <groupId>ojdbc</groupId>
-            <artifactId>ojdbc</artifactId>
-            <version>14</version>
-            <type>pom</type>
+            <groupId>com.oracle</groupId>
+            <artifactId>ojdbc14</artifactId>
+            <version>10.2.0.3.0</version>
         </dependency>
+		
+	
         <dependency>
             <groupId>com.jayway.jsonpath</groupId>
             <artifactId>json-path</artifactId>
@@ -212,12 +218,8 @@
             <version>1.9.5</version>
         </dependency>
     
-        <dependency>
-            <groupId>com.oracle</groupId>
-            <artifactId>classes12</artifactId>
-            <version>10.2.0.2.0</version>
-            <type>pom</type>
-        </dependency>
+           
+       
         <dependency>
             <groupId>javax</groupId>
             <artifactId>javaee-web-api</artifactId>
@@ -263,11 +265,11 @@
             <version>${log4j.version}</version>
         </dependency>
 		
-   <dependency>
-   <groupId>org.codehaus.jackson</groupId>
-   <artifactId>jackson-mapper-asl</artifactId>
-   <version>1.9.10</version>
-  </dependency>	
+        <dependency>
+            <groupId>org.codehaus.jackson</groupId>
+            <artifactId>jackson-mapper-asl</artifactId>
+            <version>1.9.10</version>
+        </dependency>	
         <dependency>
             <groupId>jstl</groupId>
             <artifactId>jstl</artifactId>
