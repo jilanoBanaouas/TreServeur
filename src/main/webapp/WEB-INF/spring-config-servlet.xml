@@ -21,8 +21,9 @@
     
     <!-- AVA -->
     <bean id="dataSourceAVA"  
-          class="org.springframework.jdbc.datasource.DriverManagerDataSource">  
-        <property name="driverClassName" value="oracle.jdbc.OracleDriver" />  
+          class="org.apache.commons.dbcp.BasicDataSource"
+    >  
+<!--        <property name="driverClassName" value="oracle.jdbc.OracleDriver" />  -->
         <property name="url" value="jdbc:oracle:thin:@localhost:1521:XE" />  
         <property name="username" value="ava" />  
         <property name="password" value="ava" /> 
@@ -54,7 +55,7 @@
     <!-- Add Transaction support ********************************************-->
     <bean id="txManagerAVA"
               class="org.springframework.orm.hibernate4.HibernateTransactionManager">
-        <property name="txManagerred" ref="sessionFactoryRef" />
+        <property name="txManagerred" ref="sessionFactoryAVA" />
     </bean>
     
     <!-- Use @Transaction annotations for managing transactions -->
