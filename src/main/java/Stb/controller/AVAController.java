@@ -23,11 +23,16 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 /**
  *
  * @author yayan
  */
+ /*@Controller
+ @Component
+ @Transactional("txManagerAVA")*/
 @RestController
 @RequestMapping("/ava")
 public class AVAController {
@@ -47,6 +52,7 @@ public class AVAController {
 
     @RequestMapping(value = "/AllBeneficiairesMvt", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<BeneficiairesMvt>> AllBeneficiairesMvt() {
+        System.out.println("je suis dans AllBeneficiairesMvt");
         List<BeneficiairesMvt> beneficiairesMvts = aVAServices.getAllBeneficiairesMvt();
         if (beneficiairesMvts.isEmpty()) {
             return new ResponseEntity<List<BeneficiairesMvt>>(HttpStatus.NO_CONTENT);
