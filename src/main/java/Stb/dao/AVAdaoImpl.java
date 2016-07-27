@@ -32,6 +32,23 @@ public class AVAdaoImpl implements AVADao {
 
     private Session session;
 
+    public SessionFactory getSessionFactory() {
+        return sessionFactory;
+    }
+
+    public void setSessionFactory(SessionFactory sessionFactory) {
+        this.sessionFactory = sessionFactory;
+    }
+
+    public Session getSession() {
+        return session;
+    }
+
+    public void setSession(Session session) {
+        this.session = session;
+    }
+
+    
     @Override
     public Beneficiaires getBeneficiaires(BeneficiairesPK beneficiairesPK) { // X
         session = sessionFactory.openSession();

@@ -11,7 +11,6 @@
   http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.2.xsd
   http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd
   http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd 
-
 ">
     <!-- Use @Component annotations for bean definitions -->
     <context:component-scan base-package="Stb"/>
@@ -21,9 +20,9 @@
     
     <!-- AVA -->
     <bean id="dataSourceAVA"  
-          class="org.apache.commons.dbcp.BasicDataSource"
+          class="org.springframework.jdbc.datasource.DriverManagerDataSource"
     >  
-<!--        <property name="driverClassName" value="oracle.jdbc.OracleDriver" />  -->
+      <property name="driverClassName" value="oracle.jdbc.OracleDriver" />  
         <property name="url" value="jdbc:oracle:thin:@localhost:1521:XE" />  
         <property name="username" value="ava" />  
         <property name="password" value="ava" /> 
@@ -55,7 +54,7 @@
     <!-- Add Transaction support ********************************************-->
     <bean id="txManagerAVA"
               class="org.springframework.orm.hibernate4.HibernateTransactionManager">
-        <property name="txManagerred" ref="sessionFactoryAVA" />
+        <property name="sessionFactory" ref="sessionFactoryAVA" />
     </bean>
     
     <!-- Use @Transaction annotations for managing transactions -->
@@ -70,7 +69,7 @@
     
     
     <!--sec-->
-    <bean id="dataSourceSec"  
+<!--    <bean id="dataSourceSec"  
           class="org.springframework.jdbc.datasource.DriverManagerDataSource">  
         <property name="driverClassName" value="oracle.jdbc.OracleDriver" />  
         <property name="url" value="jdbc:oracle:thin:@localhost:1521:XE" />  
@@ -103,13 +102,13 @@
         </property>
     </bean>
     
-    <!-- Add Transaction support -->
+     Add Transaction support 
     <bean id="txManagerSec"
           class="org.springframework.orm.hibernate4.HibernateTransactionManager">
         <property name="txManagerRef" ref="sessionFactorySec" />
     </bean>
     
-    <!-- Use @Transaction annotations for managing transactions -->
+     Use @Transaction annotations for managing transactions 
     <tx:annotation-driven transaction-manager="txManagerSec"/>
    
     <bean id="SecDao" class="Stb.dao.SecDaoImpl" primary="true">
@@ -117,7 +116,7 @@
     </bean>
     
      
-    <bean id="SecServices" class="Stb.services.SecServicesImpl"></bean>
+    <bean id="SecServices" class="Stb.services.SecServicesImpl"></bean>-->
     
     <!--************ REF ************-->
     <bean id="dataSourceRef"  
@@ -170,10 +169,10 @@
     </bean>
          
     <bean id="RefServices" class="Stb.services.RefServicesImpl"></bean>
-    <!--    <bean id="SecServices" class="Stb.services.SecServicesImpl"></bean>-->
+        
     
 <!--    Gen-->
-    <bean id="dataSourceGen"  
+<!--    <bean id="dataSourceGen"  
           class="org.springframework.jdbc.datasource.DriverManagerDataSource">  
         <property name="driverClassName" value="oracle.jdbc.OracleDriver" />  
         <property name="url" value="jdbc:oracle:thin:@localhost:1521:XE" />  
@@ -220,11 +219,11 @@
     
     <bean id="GenServices" class="Stb.services.GenServicesImpl"></bean>
     
-    <tx:annotation-driven transaction-manager="txManagerGen"/>
+    <tx:annotation-driven transaction-manager="txManagerGen"/>-->
 
     
 <!--    Domi-->
-    <bean id="dataSourceDomi"  
+<!--    <bean id="dataSourceDomi"  
           class="org.springframework.jdbc.datasource.DriverManagerDataSource">  
         <property name="driverClassName" value="oracle.jdbc.OracleDriver" />  
         <property name="url" value="jdbc:oracle:thin:@localhost:1521:XE" />  
@@ -267,7 +266,7 @@
     </bean>
     <bean id="DomiServices" class="Stb.services.DomiServicesImpl"></bean>
     
-    <tx:annotation-driven transaction-manager="txManagerdomi"/>
+    <tx:annotation-driven transaction-manager="txManagerdomi"/>-->
 <!--    CDI-->
 <!--    <bean id="dataSourceCdi"  
           class="org.springframework.jdbc.datasource.DriverManagerDataSource">  
@@ -310,5 +309,6 @@
     <tx:annotation-driven transaction-manager="txManagerCdi"/>
  -->
   
-    <mvc:default-servlet-handler/>
+   <mvc:default-servlet-handler/>
+
 </beans>

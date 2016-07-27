@@ -16,6 +16,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -23,13 +25,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+
+@Transactional("txManagerRef")
 @RequestMapping("/ref")
 public class RefController {
 
     @Autowired
     RefServices refServices;
 
-    static final Logger logger = Logger.getLogger(SecController.class);
+   
 
     //Retrive the name of the banque with id
     @RequestMapping(value = "/oneBanque", method = RequestMethod.GET, produces = "text/plain")
