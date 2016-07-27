@@ -16,11 +16,15 @@ import Stb.model.ava.OperationsDelegueesMvtPK;
 import Stb.model.ava.OperationsDelegueesPK;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
  * @author yayan
  */
+@Service("AVAServices")
+@Transactional
 public class AVAServicesImpl implements AVAServices {
 
     @Autowired

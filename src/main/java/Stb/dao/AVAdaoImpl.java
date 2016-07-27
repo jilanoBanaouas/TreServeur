@@ -19,11 +19,13 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Repository;
 
 /**
  *
  * @author yayan
  */
+@Repository("AVAdao")
 public class AVAdaoImpl implements AVADao {
 
     @Autowired

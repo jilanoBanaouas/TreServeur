@@ -27,10 +27,18 @@
                     <proc>none</proc>
                 </configuration>
                 <version>2.3.2</version>
-                
-      
-    
-            </plugin>
+                  </plugin>
+                  
+                   <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-war-plugin</artifactId>
+                    <version>2.4</version>
+                    <configuration>
+                        <warSourceDirectory>src/main/WEB-INF</warSourceDirectory>
+                        <warName>AVAServer</warName>
+                        <failOnMissingWebXml>false</failOnMissingWebXml>
+                    </configuration>
+                </plugin>
         </plugins>
     </build>
     <dependencies>

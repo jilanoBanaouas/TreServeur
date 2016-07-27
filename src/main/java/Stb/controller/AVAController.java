@@ -29,7 +29,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 
 @RestController
-@Transactional("txManagerAVA")
 @RequestMapping("/ava")
 public class AVAController {
 
