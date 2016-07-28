@@ -24,7 +24,7 @@ import org.springframework.transaction.annotation.Transactional;
  * @author yayan
  */
 @Service("AVAServices")
-@Transactional
+
 public class AVAServicesImpl implements AVAServices {
 
     @Autowired

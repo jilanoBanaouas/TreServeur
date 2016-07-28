@@ -20,14 +20,12 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 @EnableWebMvc
 @ComponentScan(basePackages = "Stb")
 public class AppConfig {
-    
-     @Bean
-    public ViewResolver viewResolver() {
-         InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
 
-//        viewResolver.setPrefix("/WEB-INF/views/");
+    @Bean
+    public ViewResolver viewResolver() {
+        InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
 
         return viewResolver;
     }
-    
+
 }

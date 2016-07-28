@@ -17,9 +17,11 @@ import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
@@ -85,8 +87,10 @@ public class AVAdaoImpl implements AVADao {
     @Override
     public void insertBeneficairesMvt(BeneficiairesMvt beneficiairesMvt) {
         session = sessionFactory.openSession();
-        
-        session.save(beneficiairesMvt);
+         System.out.println("je suis dans insertBeneficairesMvt(dao AVA2): "+beneficiairesMvt.getNomBenef());
+        Transaction tx = session.beginTransaction();
+         session.save(beneficiairesMvt);
+         tx.commit();
         session.close();
     }
 
