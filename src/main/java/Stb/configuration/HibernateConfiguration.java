@@ -35,7 +35,6 @@ public class HibernateConfiguration {
     private Environment environment;
 
     @Bean(name = "sessionFactoryAVA")
-    
     public LocalSessionFactoryBean sessionFactoryAVA() {
         LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
         sessionFactory.setDataSource(dataSourceAVA());
@@ -64,34 +63,34 @@ public class HibernateConfiguration {
     }
 
     // ********************** Ref config  
-    @Bean(name = "sessionFactoryRef")
-    
-    public LocalSessionFactoryBean sessionFactoryRef() {
-        LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
-        sessionFactory.setDataSource(dataSourceRef());
-        sessionFactory.setPackagesToScan(new String[]{"Stb.model.Ref"});
-        sessionFactory.setHibernateProperties(hibernatePropertiesRef());
-        return sessionFactory;
-    }
-
-    @Bean
-    public DataSource dataSourceRef() {
-        DriverManagerDataSource dataSource = new DriverManagerDataSource();
-        dataSource.setDriverClassName(environment.getRequiredProperty("oracle.driverClassName"));
-        dataSource.setUrl(environment.getRequiredProperty("oracle.url"));
-        dataSource.setUsername(environment.getRequiredProperty("ref.oracle.username"));
-        dataSource.setPassword(environment.getRequiredProperty("ref.oracle.password"));
-        return dataSource;
-    }
-
-    private Properties hibernatePropertiesRef() {
-        Properties properties = new Properties();
-        properties.put("hibernate.dialect", environment.getRequiredProperty("hibernate.dialect"));
-        properties.put("hibernate.show_sql", environment.getRequiredProperty("hibernate.show_sql"));
-        properties.put("hibernate.format_sql", environment.getRequiredProperty("hibernate.format_sql"));
-        properties.put("hibernate.current_session_context_class", environment.getRequiredProperty("hibernate.current_session_context_class"));
-        return properties;
-    }
+//    @Bean(name = "sessionFactoryRef")
+//    
+//    public LocalSessionFactoryBean sessionFactoryRef() {
+//        LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
+//        sessionFactory.setDataSource(dataSourceRef());
+//        sessionFactory.setPackagesToScan(new String[]{"Stb.model.Ref"});
+//        sessionFactory.setHibernateProperties(hibernatePropertiesRef());
+//        return sessionFactory;
+//    }
+//
+//    @Bean
+//    public DataSource dataSourceRef() {
+//        DriverManagerDataSource dataSource = new DriverManagerDataSource();
+//        dataSource.setDriverClassName(environment.getRequiredProperty("oracle.driverClassName"));
+//        dataSource.setUrl(environment.getRequiredProperty("oracle.url"));
+//        dataSource.setUsername(environment.getRequiredProperty("ref.oracle.username"));
+//        dataSource.setPassword(environment.getRequiredProperty("ref.oracle.password"));
+//        return dataSource;
+//    }
+//
+//    private Properties hibernatePropertiesRef() {
+//        Properties properties = new Properties();
+//        properties.put("hibernate.dialect", environment.getRequiredProperty("hibernate.dialect"));
+//        properties.put("hibernate.show_sql", environment.getRequiredProperty("hibernate.show_sql"));
+//        properties.put("hibernate.format_sql", environment.getRequiredProperty("hibernate.format_sql"));
+//        properties.put("hibernate.current_session_context_class", environment.getRequiredProperty("hibernate.current_session_context_class"));
+//        return properties;
+//    }
 
     // **********Transaction
     @Bean
