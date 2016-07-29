@@ -51,4 +51,6 @@ public interface AVADao {
 
     public void updateOperationsDelegueesMvt(OperationsDelegueesMvt operationsDelegueesMvt);
 
+    
+    
 }

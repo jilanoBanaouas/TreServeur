@@ -106,13 +106,18 @@ public class AVAdaoImpl implements AVADao {
     @Override
     public BeneficiairesMvt getBeneficiairesMvt(BeneficiairesMvtPK beneficiairesMvtPK) {
         session = sessionFactory.openSession();
-        return ((BeneficiairesMvt) session.get(BeneficiairesMvt.class, beneficiairesMvtPK));
+        System.out.println(beneficiairesMvtPK.getNoPieceBenef()+"hhhhhhhhhhhhhhhhhhhhhhhhhhhhh");
+        BeneficiairesMvt benMVT=((BeneficiairesMvt) session.get(BeneficiairesMvt.class, beneficiairesMvtPK));
+      session.close();
+        return benMVT;
     }
 
     @Override
     public void updateBeneficiairesMvt(BeneficiairesMvt beneficiairesMvt) {
         session = sessionFactory.openSession();
+         Transaction tx = session.beginTransaction();
         session.merge(beneficiairesMvt);
+         tx.commit();
         session.close();
     }
 
