@@ -14,8 +14,12 @@ import Stb.model.ava.OperationsDelegueesMvt;
 import Stb.model.ava.OperationsDelegueesMvtPK;
 import Stb.model.ava.OperationsDelegueesPK;
 import Stb.services.AVAServices;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
@@ -34,7 +38,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @RestController
 @RequestMapping("/ava")
 public class AVAController {
-
+    
     @Autowired
     AVAServices aVAServices;
 
@@ -43,11 +47,10 @@ public class AVAController {
     public ResponseEntity<Void> insertBeneficairesMvt(@RequestBody BeneficiairesMvt beneficiairesMvt) {
         if (null != aVAServices.getBeneficiairesMvt(beneficiairesMvt.getBeneficiairesMvtPK())) {
             return new ResponseEntity<Void>(HttpStatus.CONFLICT);
-       }
+        }
         aVAServices.insertBeneficairesMvt(beneficiairesMvt);
         return new ResponseEntity<Void>(HttpStatus.CREATED);
     }
-
     
     @RequestMapping(value = "/AllBeneficiairesMvt", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<BeneficiairesMvt>> AllBeneficiairesMvt() {
@@ -65,23 +68,33 @@ public class AVAController {
             @PathVariable("codeProduitService") short codeProduitService,
             @PathVariable("codeOperation") short codeOperation,
             @PathVariable("refOperation") long refOperation,
-            @PathVariable("dateOperation") @DateTimeFormat(pattern = "yyyy-mm-dd") Date dateOperation,
+            @PathVariable("dateOperation") String dateOperation,
             @PathVariable("uniteOperation") short uniteOperation,
             @PathVariable("noPieceBenef") String noPieceBenef
     ) {
-
+        System.out.println("je suis dans oneBeneficiairesMvt");
+                
         BeneficiairesMvtPK beneficiairesMvtPK = new BeneficiairesMvtPK();
         beneficiairesMvtPK.setCodeOperation(codeOperation);
         beneficiairesMvtPK.setCodeProduitService(codeProduitService);
-        beneficiairesMvtPK.setDateOperation(dateOperation);
+        SimpleDateFormat pattern=new SimpleDateFormat("yyyy-MM-dd");
+        try {
+            Date date=pattern.parse(dateOperation);
+            System.out.println("date "+date);
+            beneficiairesMvtPK.setDateOperation(date);
+        } catch (ParseException ex) {
+            Logger.getLogger(AVAController.class.getName()).log(Level.SEVERE, null, ex);
+            ex.printStackTrace();
+        }
+        
         beneficiairesMvtPK.setNoPieceBenef(noPieceBenef);
         beneficiairesMvtPK.setRefOperation(refOperation);
         beneficiairesMvtPK.setUniteOperation(uniteOperation);
-        System.out.println("date de l url " + dateOperation);
-        System.out.println("je suis dans oneBeneficiairesMvt , param: " + beneficiairesMvtPK.toString());
+        
         BeneficiairesMvt beneficiairesMvt = aVAServices.getBeneficiairesMvt(beneficiairesMvtPK);
+      
         if (beneficiairesMvt == null) {
-            System.out.println("nuuuuuuuuuuuuuuuuuuuuuuuuuuuul");
+              System.out.println("je suis à la fin de on;uy_kuutkkgtubeBeneficiairesMvt");
             return new ResponseEntity<BeneficiairesMvt>(HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<BeneficiairesMvt>(beneficiairesMvt, HttpStatus.OK);
@@ -91,53 +104,64 @@ public class AVAController {
     @RequestMapping(value = "/updateBeneficiairesMvt", method = RequestMethod.PUT)
     public ResponseEntity<BeneficiairesMvt> updateBeneficiairesMvt(@RequestBody BeneficiairesMvt beneficiairesMvt) {
         BeneficiairesMvt currentBeneficiairesMvt = aVAServices.getBeneficiairesMvt(beneficiairesMvt.getBeneficiairesMvtPK());
-//        if (currentBeneficiairesMvt == null) {
-//            System.out.println(" pp not found");
-//            return new ResponseEntity<BeneficiairesMvt>(HttpStatus.NOT_FOUND);
-//        }
-
+        if (currentBeneficiairesMvt == null) {
+            return new ResponseEntity<BeneficiairesMvt>(HttpStatus.NOT_FOUND);
+        }
         aVAServices.updateBeneficiairesMvt(beneficiairesMvt);
         System.out.println("update fé");
         return new ResponseEntity<BeneficiairesMvt>(beneficiairesMvt, HttpStatus.OK);
-
+        
     }
 //
 ////  OperationsDéléguéesMVT
-//    @RequestMapping(value = "/insertOperationsDelegueesMvt", method = RequestMethod.POST)
-//    public ResponseEntity<Void> insertOperationsDelegueesMvt(@RequestBody OperationsDelegueesMvt operationsDelegueesMvt) {
-//        if (aVAServices.getOperationsDelegueesMvt(operationsDelegueesMvt.getOperationsDelegueesMvtPK()) != null) {
-//            return new ResponseEntity<Void>(HttpStatus.CONFLICT);
-//        }
-//        aVAServices.insertOperationsDelegueesMvt(operationsDelegueesMvt);
-//        return new ResponseEntity<Void>(HttpStatus.CREATED);
-//    }
-//
-//    @RequestMapping(value = "/AllOperationsDelegueesMvt", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-//    public ResponseEntity<List<OperationsDelegueesMvt>> AllOperationsDelegueesMvt() {
-//        List<OperationsDelegueesMvt> operationsDelegueesMvt = aVAServices.getAllOperationsDelegueesMvt();
-//        if (operationsDelegueesMvt.isEmpty()) {
-//            return new ResponseEntity<List<OperationsDelegueesMvt>>(HttpStatus.NO_CONTENT);
-//        }
-//        return new ResponseEntity<List<OperationsDelegueesMvt>>(operationsDelegueesMvt, HttpStatus.OK);
-//    }
-//
-//    // Retrieve single OperationsDelegueesMvt
-//    @RequestMapping(value = "/oneOperationsDelegueesMvt", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-//    public ResponseEntity<OperationsDelegueesMvt> oneOperationsDelegueesMvt(@RequestBody OperationsDelegueesMvtPK operationsDelegueesMvtPK) {
-//        OperationsDelegueesMvt operationsDelegueesMvt = aVAServices.getOperationsDelegueesMvt(operationsDelegueesMvtPK);
-//        if (operationsDelegueesMvt == null) {
-//            return new ResponseEntity<OperationsDelegueesMvt>(HttpStatus.NOT_FOUND);
-//        }
-//        return new ResponseEntity<OperationsDelegueesMvt>(operationsDelegueesMvt, HttpStatus.OK);
-//    }
-//
-    // Update
 
+    @RequestMapping(value = "/insertOperationsDelegueesMvt", method = RequestMethod.POST)
+    public ResponseEntity<Void> insertOperationsDelegueesMvt(@RequestBody OperationsDelegueesMvt operationsDelegueesMvt) {
+        System.out.println("je suis dans insertOperationsDelegueesMvt");
+        if (aVAServices.getOperationsDelegueesMvt(operationsDelegueesMvt.getOperationsDelegueesMvtPK()) != null) {
+            return new ResponseEntity<Void>(HttpStatus.CONFLICT);
+        }
+        aVAServices.insertOperationsDelegueesMvt(operationsDelegueesMvt);
+        return new ResponseEntity<Void>(HttpStatus.CREATED);
+    }
+    
+    @RequestMapping(value = "/AllOperationsDelegueesMvt", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<OperationsDelegueesMvt>> AllOperationsDelegueesMvt() {
+        List<OperationsDelegueesMvt> operationsDelegueesMvt = aVAServices.getAllOperationsDelegueesMvt();
+        if (operationsDelegueesMvt.isEmpty()) {
+            return new ResponseEntity<List<OperationsDelegueesMvt>>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<List<OperationsDelegueesMvt>>(operationsDelegueesMvt, HttpStatus.OK);
+    }
+
+    // Retrieve single OperationsDelegueesMvt
+    @RequestMapping(value = "/oneOperationsDelegueesMvt/{codeProduitService},{codeOperation},{refOperation},{dateOperation},{uniteOperation}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<OperationsDelegueesMvt> oneOperationsDelegueesMvt(
+            @PathVariable("codeProduitService") short codeProduitService,
+            @PathVariable("codeOperation") int codeOperation,
+            @PathVariable("refOperation") long refOperation,
+            @PathVariable("dateOperation") Date dateOperation,
+            @PathVariable("uniteOperation") short uniteOperation
+    ) {
+        OperationsDelegueesMvtPK opDelMvtPK = new OperationsDelegueesMvtPK();
+        opDelMvtPK.setCodeOperation(codeOperation);
+        opDelMvtPK.setCodeProduitService(codeProduitService);
+        opDelMvtPK.setDateOperation(dateOperation);
+        opDelMvtPK.setUniteOperation(uniteOperation);
+        opDelMvtPK.setRefOperation(refOperation);
+        OperationsDelegueesMvt operationsDelegueesMvt = aVAServices.getOperationsDelegueesMvt(opDelMvtPK);
+        if (operationsDelegueesMvt == null) {
+            return new ResponseEntity<OperationsDelegueesMvt>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<OperationsDelegueesMvt>(operationsDelegueesMvt, HttpStatus.OK);
+    }
+
+    // Update
     @RequestMapping(value = "/updateOperationsDelegueesMvt", method = RequestMethod.PUT)
     public ResponseEntity<OperationsDelegueesMvt> updateOperationsDelegueesMvt(@RequestBody OperationsDelegueesMvt operationsDelegueesMvt) {
-
+        
         OperationsDelegueesMvt operationsDelegueesMvt1 = aVAServices.getOperationsDelegueesMvt(operationsDelegueesMvt.getOperationsDelegueesMvtPK());
-
+        
         if (operationsDelegueesMvt1 == null) {
             System.out.println("OperationsDelegueesMvt not found");
             return new ResponseEntity<OperationsDelegueesMvt>(HttpStatus.NOT_FOUND);
