@@ -37,6 +37,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 @RestController
 @RequestMapping("/ava")
+
 public class AVAController {
     
     @Autowired
@@ -45,7 +46,8 @@ public class AVAController {
     //    Insert BeneficiaresMvt
     @RequestMapping(value = "/insertBeneficairesMvt", method = RequestMethod.POST)
     public ResponseEntity<Void> insertBeneficairesMvt(@RequestBody BeneficiairesMvt beneficiairesMvt) {
-        if (null != aVAServices.getBeneficiairesMvt(beneficiairesMvt.getBeneficiairesMvtPK())) {
+       BeneficiairesMvt testExistance=aVAServices.getBeneficiairesMvt(beneficiairesMvt.getBeneficiairesMvtPK());
+        if (testExistance != null ) {
             return new ResponseEntity<Void>(HttpStatus.CONFLICT);
         }
         aVAServices.insertBeneficairesMvt(beneficiairesMvt);

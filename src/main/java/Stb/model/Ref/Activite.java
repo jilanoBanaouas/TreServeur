@@ -81,6 +81,7 @@ public class Activite implements Serializable {
         return true;
     }
 
+   
     @Override
     public String toString() {
         return "Stb.model.Ref.Activite[ codeActivite=" + codeActivite + " ]";

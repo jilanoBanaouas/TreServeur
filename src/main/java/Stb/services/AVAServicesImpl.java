@@ -23,14 +23,15 @@ import org.springframework.transaction.annotation.Transactional;
  *
  * @author yayan
  */
-@Service("AVAServices")
-
+@Service("AvaServices")
+@Transactional("transactionManagerAva")
 public class AVAServicesImpl implements AVAServices {
 
     @Autowired
     AVADao aVADao;
 
     @Override
+    
     public void insertBeneficairesMvt(BeneficiairesMvt beneficiairesMvt) {
         aVADao.insertBeneficairesMvt(beneficiairesMvt);
     }

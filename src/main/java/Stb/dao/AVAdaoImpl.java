@@ -53,7 +53,7 @@ public class AVAdaoImpl implements AVADao {
     }
 
     @Override
-    public Beneficiaires getBeneficiaires(BeneficiairesPK beneficiairesPK) { // X
+    public Beneficiaires getBeneficiaires(BeneficiairesPK beneficiairesPK) {
         session = sessionFactory.openSession();
         Beneficiaires ben = ((Beneficiaires) session.get(Beneficiaires.class, beneficiairesPK));
         return ben;
@@ -82,13 +82,15 @@ public class AVAdaoImpl implements AVADao {
         session.close();
         return liste;
     }
-
     @Override
+    
     public void insertBeneficairesMvt(BeneficiairesMvt beneficiairesMvt) {
         session = sessionFactory.openSession();
-        Transaction tx = session.beginTransaction();
-        session.save(beneficiairesMvt);
-        tx.commit();
+        
+//        Transaction tx = session.beginTransaction();
+        session.persist(beneficiairesMvt);
+        
+//        tx.commit();
         session.close();
     }
 
@@ -104,7 +106,6 @@ public class AVAdaoImpl implements AVADao {
     @Override
     public BeneficiairesMvt getBeneficiairesMvt(BeneficiairesMvtPK beneficiairesMvtPK) {
         session = sessionFactory.openSession();
-        System.out.println(beneficiairesMvtPK.getNoPieceBenef() + "hhhhhhhhhhhhhhhhhhhhhhhhhhhhh");
         BeneficiairesMvt benMVT = ((BeneficiairesMvt) session.get(BeneficiairesMvt.class, beneficiairesMvtPK));
         session.close();
         return benMVT;
@@ -113,18 +114,16 @@ public class AVAdaoImpl implements AVADao {
     @Override
     public void updateBeneficiairesMvt(BeneficiairesMvt beneficiairesMvt) {
         session = sessionFactory.openSession();
-        Transaction tx = session.beginTransaction();
+//        Transaction tx = session.beginTransaction();
         session.update(beneficiairesMvt);
-        tx.commit();
+//        tx.commit();
         session.close();
     }
 
     @Override
     public void insertOperationsDelegueesMvt(OperationsDelegueesMvt operationsDelegueesMvt) {
         session = sessionFactory.openSession();
-        Transaction tx = session.beginTransaction();
-        session.save(operationsDelegueesMvt);
-         tx.commit();
+        session.persist(operationsDelegueesMvt);
         session.close();
 
     }
@@ -147,9 +146,9 @@ public class AVAdaoImpl implements AVADao {
     @Override
     public void updateOperationsDelegueesMvt(OperationsDelegueesMvt operationsDelegueesMvt) {
         session = sessionFactory.openSession();
-             Transaction tx = session.beginTransaction();
+//        Transaction tx = session.beginTransaction();
         session.merge(operationsDelegueesMvt);
-        tx.commit();
+//        tx.commit();
         session.close();
     }
 

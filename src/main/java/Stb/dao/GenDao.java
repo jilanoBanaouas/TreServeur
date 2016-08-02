@@ -40,4 +40,7 @@ public interface GenDao {
     public SwiftRecus getSwiftRecues(String mtxxx) throws Exception;
     
     public void savetitre(OperationTitre p);
+    
+    //MAJ
+    
 }
