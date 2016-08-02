@@ -37,7 +37,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 @RestController
 @RequestMapping("/ava")
-
 public class AVAController {
     
     @Autowired
@@ -74,8 +73,7 @@ public class AVAController {
             @PathVariable("uniteOperation") short uniteOperation,
             @PathVariable("noPieceBenef") String noPieceBenef
     ) {
-        System.out.println("je suis dans oneBeneficiairesMvt");
-                
+  
         BeneficiairesMvtPK beneficiairesMvtPK = new BeneficiairesMvtPK();
         beneficiairesMvtPK.setCodeOperation(codeOperation);
         beneficiairesMvtPK.setCodeProduitService(codeProduitService);
@@ -96,7 +94,6 @@ public class AVAController {
         BeneficiairesMvt beneficiairesMvt = aVAServices.getBeneficiairesMvt(beneficiairesMvtPK);
       
         if (beneficiairesMvt == null) {
-              System.out.println("je suis à la fin de on;uy_kuutkkgtubeBeneficiairesMvt");
             return new ResponseEntity<BeneficiairesMvt>(HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<BeneficiairesMvt>(beneficiairesMvt, HttpStatus.OK);

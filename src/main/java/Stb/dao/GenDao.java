@@ -4,15 +4,9 @@
  * and open the template in the editor.
  */
 package Stb.dao;
-import Stb.model.Gen.MessageRecus;
-import Stb.model.Gen.MswMtxxx;
-import Stb.model.Gen.MswNomField;
-import Stb.model.Gen.MswRecepMsg;
-import Stb.model.Gen.MswUtlField;
-import Stb.model.Gen.MswUtlMtxxx;
-import Stb.model.Gen.MswUtlSequence;
-import Stb.model.Gen.OperationTitre;
-import Stb.model.Gen.SwiftRecus;
+
+import Stb.model.Gen.Documents;
+import Stb.model.Gen.DocumentsPK;
 import java.util.List;
 
 /**
@@ -21,26 +15,14 @@ import java.util.List;
  */
 public interface GenDao {
 
-    //field
-    public List<MswUtlField> allfield(int numero, String nmesg, int numSequence) throws Exception;
+    public void insertDocuments(Documents documents);
 
-    public MswNomField getfieldbynom(String mtxxx, String seq, String field) throws Exception;
+    public List<Documents> getAllDocuments();
 
-    //MsgRecu
-    public List<MessageRecus> Listmtxxrecues() throws Exception;
+    public Documents getDocuments(DocumentsPK documentsPK);
 
-    public List<MswRecepMsg> getdetailR(String mtxxx) throws Exception;
+    public void updateDocuments(Documents documents);
 
-    public List<MswUtlMtxxx> Listmtxxenvoyes() throws Exception;
-
-    public MswMtxxx gettypemtx(String mtxxx) throws Exception;
-
-    public List<MswUtlSequence> Listseqs(int numero, String nmesg) throws Exception;
-
-    public SwiftRecus getSwiftRecues(String mtxxx) throws Exception;
-    
-    public void savetitre(OperationTitre p);
-    
-    //MAJ
+ 
     
 }
