@@ -30,6 +30,8 @@ public class GenServicesImpl implements GenServices {
         genDao.insertDocuments(documents);
     }
     
+    
+    
     @Override
     public List<Documents> getAllDocuments() {
         return genDao.getAllDocuments();

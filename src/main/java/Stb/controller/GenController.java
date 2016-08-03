@@ -68,7 +68,7 @@ public class GenController {
     
      @RequestMapping(value = "/oneDocuments/{typeDossier},{numDossier},{dateDossier},{numLigne}",
             method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Documents> oneBeneficiairesMvt(
+    public ResponseEntity<Documents> oneDocuments(
             @PathVariable("typeDossier") String typeDossier,
             @PathVariable("numDossier") long numDossier,
             @PathVariable("dateDossier") String dateDossier,
@@ -99,4 +99,5 @@ public class GenController {
         }
         return new ResponseEntity<Documents>(documents, HttpStatus.OK);
     }
+    
 }

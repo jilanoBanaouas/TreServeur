@@ -12,6 +12,7 @@ import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
@@ -51,10 +52,10 @@ public class GenDaoImpl implements  GenDao{
     public void insertDocuments(Documents documents) {
      session = sessionFactory.openSession();
         
-//        Transaction tx = session.beginTransaction();
-        session.persist(documents);
+        Transaction tx = session.beginTransaction();
+        session.save(documents);
         
-//        tx.commit();
+        tx.commit();
         session.close(); }
 
     @Override
@@ -69,6 +70,7 @@ public class GenDaoImpl implements  GenDao{
     public Documents getDocuments(DocumentsPK documentsPK) {
         session = sessionFactory.openSession();
         Documents ben = ((Documents) session.get(Documents.class, documentsPK));
+         session.close();
         return ben; }
 
     @Override

@@ -87,10 +87,10 @@ public class AVAdaoImpl implements AVADao {
     public void insertBeneficairesMvt(BeneficiairesMvt beneficiairesMvt) {
         session = sessionFactory.openSession();
         
-//        Transaction tx = session.beginTransaction();
-        session.persist(beneficiairesMvt);
-        
-//        tx.commit();
+        Transaction tx = session.beginTransaction();
+        session.save(beneficiairesMvt);
+        //persist dosn't work
+        tx.commit();
         session.close();
     }
 
@@ -114,16 +114,18 @@ public class AVAdaoImpl implements AVADao {
     @Override
     public void updateBeneficiairesMvt(BeneficiairesMvt beneficiairesMvt) {
         session = sessionFactory.openSession();
-//        Transaction tx = session.beginTransaction();
+        Transaction tx = session.beginTransaction();
         session.update(beneficiairesMvt);
-//        tx.commit();
+ tx.commit();
         session.close();
     }
 
     @Override
     public void insertOperationsDelegueesMvt(OperationsDelegueesMvt operationsDelegueesMvt) {
         session = sessionFactory.openSession();
-        session.persist(operationsDelegueesMvt);
+          Transaction tx = session.beginTransaction();       
+        session.save(operationsDelegueesMvt);
+         tx.commit();
         session.close();
 
     }
@@ -140,15 +142,19 @@ public class AVAdaoImpl implements AVADao {
     @Override
     public OperationsDelegueesMvt getOperationsDelegueesMvt(OperationsDelegueesMvtPK operationsDelegueesMvtPK) {
         session = sessionFactory.openSession();
-        return ((OperationsDelegueesMvt) session.get(OperationsDelegueesMvt.class, operationsDelegueesMvtPK));
+       OperationsDelegueesMvt operationsDelegueesMvt=  ((OperationsDelegueesMvt) session.get(OperationsDelegueesMvt.class, operationsDelegueesMvtPK));
+       session.close();
+       return operationsDelegueesMvt;
+    
+    
     }
 
     @Override
     public void updateOperationsDelegueesMvt(OperationsDelegueesMvt operationsDelegueesMvt) {
         session = sessionFactory.openSession();
-//        Transaction tx = session.beginTransaction();
+ Transaction tx = session.beginTransaction();
         session.merge(operationsDelegueesMvt);
-//        tx.commit();
+ tx.commit();
         session.close();
     }
 
