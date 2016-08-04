@@ -27,18 +27,18 @@
                     <proc>none</proc>
                 </configuration>
                 <version>2.3.2</version>
-                  </plugin>
+            </plugin>
                   
-                   <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-war-plugin</artifactId>
-                    <version>2.4</version>
-                    <configuration>
-                        <warSourceDirectory>src/main/WEB-INF</warSourceDirectory>
-                        <warName>AVAServer</warName>
-                        <failOnMissingWebXml>false</failOnMissingWebXml>
-                    </configuration>
-                </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>2.4</version>
+                <configuration>
+                    <warSourceDirectory>src/main/WEB-INF</warSourceDirectory>
+                    <warName>AVAServer</warName>
+                    <failOnMissingWebXml>false</failOnMissingWebXml>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
     <dependencies>
@@ -192,6 +192,24 @@
         </dependency>
        
        
+       
+        <!--jsf--> 
+        <dependency>
+            <groupId>com.sun.faces</groupId>
+            <artifactId>jsf-api</artifactId>
+            <version>2.1.6</version>
+        </dependency>
+        <dependency>
+            <groupId>com.sun.faces</groupId>
+            <artifactId>jsf-impl</artifactId>
+            <version>2.1.29-05</version>
+        </dependency>
+        <dependency>
+            <groupId>org.primefaces</groupId>
+            <artifactId>primefaces</artifactId>
+            <version>6.0</version>
+        </dependency>
+              
 		
         <!-- ORACLE database driver -->
         <dependency>
@@ -226,9 +244,7 @@
             <artifactId>mockito-core</artifactId>
             <version>1.9.5</version>
         </dependency>
-    
-           
-       
+     
         <dependency>
             <groupId>javax</groupId>
             <artifactId>javaee-web-api</artifactId>
