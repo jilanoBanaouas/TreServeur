@@ -24,7 +24,6 @@ public class AppConfig {
     @Bean
     public ViewResolver viewResolver() {
         InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
-
         return viewResolver;
     }
 

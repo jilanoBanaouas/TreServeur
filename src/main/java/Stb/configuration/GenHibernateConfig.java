@@ -32,10 +32,8 @@ public class GenHibernateConfig {
     private Environment environment;
 
     @Bean(name = "sessionFactoryGen")
-    public SessionFactory sessionFactoryGen() {
-
+   public SessionFactory sessionFactoryGen() {
         LocalSessionFactoryBuilder builder = new LocalSessionFactoryBuilder(dataSourceGen());
-
         builder.scanPackages("Stb.model.Gen")
                 .addProperties(hibernatePropertiesGen());
         return builder.buildSessionFactory();
