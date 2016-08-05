@@ -27,7 +27,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableTransactionManagement
 @ComponentScan("Stb.configuration")
 @PropertySource(value = {"classpath:application.properties"})
-public class GenHibernateConfig {
+public class GenHibernateConfig extends AbstractHibernateConfig{
     @Autowired
     private Environment environment;
 
@@ -35,7 +35,7 @@ public class GenHibernateConfig {
    public SessionFactory sessionFactoryGen() {
         LocalSessionFactoryBuilder builder = new LocalSessionFactoryBuilder(dataSourceGen());
         builder.scanPackages("Stb.model.Gen")
-                .addProperties(hibernatePropertiesGen());
+                .addProperties(hibernateProperties());
         return builder.buildSessionFactory();
     }
 
@@ -49,17 +49,10 @@ public class GenHibernateConfig {
         return dataSource;
     }
 
-    private Properties hibernatePropertiesGen() {
-        Properties properties = new Properties();
-        properties.put("hibernate.dialect", environment.getRequiredProperty("hibernate.dialect"));
-        properties.put("hibernate.show_sql", environment.getRequiredProperty("hibernate.show_sql"));
-        properties.put("hibernate.format_sql", environment.getRequiredProperty("hibernate.format_sql"));
-
-        return properties;
-    }
 
     // **********Transaction
     @Bean(name = "transactionManagerGen")
+   
     public HibernateTransactionManager txManager() {
 
         HibernateTransactionManager txManager = new HibernateTransactionManager(sessionFactoryGen());

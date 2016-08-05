@@ -27,7 +27,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableTransactionManagement
 @ComponentScan("Stb.configuration")
 @PropertySource(value = {"classpath:application.properties"})
-public class RefHibernateConfig {
+public class RefHibernateConfig extends AbstractHibernateConfig{
 
     @Autowired
     private Environment environment;
@@ -36,7 +36,7 @@ public class RefHibernateConfig {
     public SessionFactory sessionFactoryRef() {
         LocalSessionFactoryBuilder builder = new LocalSessionFactoryBuilder(dataSourceRef());
         builder.scanPackages("Stb.model.Ref")
-                .addProperties(hibernatePropertiesRef());
+                .addProperties(hibernateProperties());
         return builder.buildSessionFactory();
     }
 
@@ -50,13 +50,7 @@ public class RefHibernateConfig {
         return dataSource;
     }
 
-    private Properties hibernatePropertiesRef() {
-        Properties properties = new Properties();
-        properties.put("hibernate.dialect", environment.getRequiredProperty("hibernate.dialect"));
-        properties.put("hibernate.show_sql", environment.getRequiredProperty("hibernate.show_sql"));
-        properties.put("hibernate.format_sql", environment.getRequiredProperty("hibernate.format_sql"));
-        return properties;
-    }
+   
 
     // **********Transaction
     @Bean(name = "transactionManagerRef")
@@ -66,5 +60,7 @@ public class RefHibernateConfig {
         txManager.setSessionFactory(sessionFactoryRef());
         return txManager;
     }
+        
+   
 
 }
