@@ -23,15 +23,16 @@ public interface AVAServices {
 
     // Beneficiaires
     public Beneficiaires getBeneficiaires(BeneficiairesPK beneficiairesPK);
-//    public void insertBeneficiaires(Beneficiaires beneficiaires);
-
+    //    public void insertBeneficiaires(Beneficiaires beneficiaires);
     public List<Beneficiaires> getAllBeneficiaires();
+    
+    //OperationsDeleguees
 
     public OperationsDeleguees getOperationsDeleguees(OperationsDelegueesPK operationsDelegueesPK);
 
     public List<OperationsDeleguees> getAllOperationsDeleguees();
 
-//    BeneficiaresMvt
+    //    BeneficiaresMvt
     public void insertBeneficairesMvt(BeneficiairesMvt beneficiairesMvt);
 
     public List<BeneficiairesMvt> getAllBeneficiairesMvt();

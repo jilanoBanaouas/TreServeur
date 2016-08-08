@@ -22,18 +22,18 @@ import java.util.List;
 public interface AVADao {
 
     // Beneficiaires
-    
     //    public void insertBeneficiaires(Beneficiaires beneficiaires);
     public Beneficiaires getBeneficiaires(BeneficiairesPK beneficiairesPK);
+
     public List<Beneficiaires> getAllBeneficiaires();
 
     //OperationsDeleguees
-    
     //    public void insertOperationsDeleguees(OperationsDeleguees operationsDeleguees);
     public OperationsDeleguees getOperationsDeleguees(OperationsDelegueesPK operationsDelegueesPK);
+
     public List<OperationsDeleguees> getAllOperationsDeleguees();
 
-//    BeneficiaresMvt
+    //    BeneficiaresMvt
     public void insertBeneficairesMvt(BeneficiairesMvt beneficiairesMvt);
 
     public List<BeneficiairesMvt> getAllBeneficiairesMvt();
@@ -42,7 +42,7 @@ public interface AVADao {
 
     public void updateBeneficiairesMvt(BeneficiairesMvt beneficiairesMvt);
 
-//  OperationsDéléguéesMVT
+    //  OperationsDéléguéesMVT
     public void insertOperationsDelegueesMvt(OperationsDelegueesMvt operationsDelegueesMvt);
 
     public List<OperationsDelegueesMvt> getAllOperationsDelegueesMvt();
@@ -51,6 +51,4 @@ public interface AVADao {
 
     public void updateOperationsDelegueesMvt(OperationsDelegueesMvt operationsDelegueesMvt);
 
-    
-    
 }

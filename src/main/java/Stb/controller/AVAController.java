@@ -62,8 +62,65 @@ public class AVAController {
         return new ResponseEntity<List<BeneficiairesMvt>>(beneficiairesMvts, HttpStatus.OK);
     }
 
+    // Retrieve single Beneficiaires
+    @RequestMapping(value = "/oneBeneficiaires/{numDossier},{dateDossier},{codeTypeDos},{noPieceBenef}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Beneficiaires> oneBeneficiaires(
+            @PathVariable("numDossier") int numDossier,
+            @PathVariable("dateDossier") String dateDossier,
+            @PathVariable("codeTypeDos") short codeTypeDos,
+            @PathVariable("noPieceBenef") String noPieceBenef) {
+        BeneficiairesPK beneficiairesPk = new BeneficiairesPK();
+        beneficiairesPk.setCodeTypeDos(codeTypeDos);
+        beneficiairesPk.setNoPieceBenef(noPieceBenef);
+        beneficiairesPk.setNumDossier(numDossier);
+
+        try {
+            SimpleDateFormat pattern = new SimpleDateFormat("yyyy-MM-dd");
+            Date date = pattern.parse(dateDossier);
+
+            beneficiairesPk.setDateDossier(date);
+
+        } catch (ParseException ex) {
+            Logger.getLogger(AVAController.class.getName()).log(Level.SEVERE, null, ex);
+            ex.printStackTrace();
+        }
+        Beneficiaires beneficiaires = aVAServices.getBeneficiaires(beneficiairesPk);
+        if (beneficiaires == null) {
+            return new ResponseEntity<Beneficiaires>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<Beneficiaires>(beneficiaires, HttpStatus.OK);
+    }
+
+    // Retrieve single oneOperationsDeleguees
+    @RequestMapping(value = "/oneOperationsDeleguees/{numDossier},{dateDossier},{codeAgenceAva}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<OperationsDeleguees> oneOperationsDeleguees(
+            @PathVariable("numDossier") long numDossier,
+            @PathVariable("dateDossier") String dateDossier,
+            @PathVariable("codeAgenceAva") short codeAgenceAva
+    ) {
+        OperationsDelegueesPK operationsDelegueesPK = new OperationsDelegueesPK();
+        operationsDelegueesPK.setCodeAgenceAva(codeAgenceAva);
+        operationsDelegueesPK.setNumDossier(numDossier);
+
+        try {
+            SimpleDateFormat pattern = new SimpleDateFormat("yyyy-MM-dd");
+            Date date = pattern.parse(dateDossier);
+            operationsDelegueesPK.setDateDossier(date);
+
+        } catch (ParseException ex) {
+            Logger.getLogger(AVAController.class.getName()).log(Level.SEVERE, null, ex);
+            ex.printStackTrace();
+        }
+
+        OperationsDeleguees operationsDeleguees = aVAServices.getOperationsDeleguees(operationsDelegueesPK);
+        if (operationsDeleguees == null) {
+            return new ResponseEntity<OperationsDeleguees>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<OperationsDeleguees>(operationsDeleguees, HttpStatus.OK);
+    }
+
     // Retrieve single BeneficiairesMvt
-    @RequestMapping(value = "/oneBeneficiairesMvt/{codeProduitService},{codeOperation},{refOperation},{dateOperation},{uniteOperation},{noPieceBenef}",
+    @RequestMapping(value = "/oneBeneficiairesMvt/{codeProduitService},{codeOoneBenperation},{refOperation},{dateOperation},{uniteOperation},{noPieceBenef}",
             method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<BeneficiairesMvt> oneBeneficiairesMvt(
             @PathVariable("codeProduitService") short codeProduitService,
@@ -125,20 +182,19 @@ public class AVAController {
         return new ResponseEntity<Void>(HttpStatus.CREATED);
     }
 
-     @RequestMapping(value = "/insertMultiple", method = RequestMethod.POST)
+    @RequestMapping(value = "/insertMultiple", method = RequestMethod.POST)
     public ResponseEntity<Void> insertMultiple(@RequestBody OperationDelMVTAndListBenifMVT operationDelMVTAndListBenifMVT) {
-        
+
         if (aVAServices.getOperationsDelegueesMvt(operationDelMVTAndListBenifMVT.getOperationsDelegueesMvt().getOperationsDelegueesMvtPK()) != null) {
             return new ResponseEntity<Void>(HttpStatus.CONFLICT);
         }
-        
+
         aVAServices.insertOperationsDelegueesMvt(operationDelMVTAndListBenifMVT.getOperationsDelegueesMvt());
         aVAServices.insertListBeneficairesMvt(operationDelMVTAndListBenifMVT.getBeneficiairesMvts());
-        
-        
+
         return new ResponseEntity<Void>(HttpStatus.CREATED);
     }
-    
+
     @RequestMapping(value = "/AllOperationsDelegueesMvt", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<OperationsDelegueesMvt>> AllOperationsDelegueesMvt() {
         List<OperationsDelegueesMvt> operationsDelegueesMvt = aVAServices.getAllOperationsDelegueesMvt();
@@ -192,44 +248,23 @@ public class AVAController {
         aVAServices.updateOperationsDelegueesMvt(operationsDelegueesMvt);
         return new ResponseEntity<OperationsDelegueesMvt>(operationsDelegueesMvt, HttpStatus.OK);
     }
-//
-//    // Retrieve single Beneficiaires
-//    @RequestMapping(value = "/oneBeneficiaires", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-//    public ResponseEntity<Beneficiaires> oneBeneficiaires(BeneficiairesPK beneficiairesPK) {
-//
-//        Beneficiaires beneficiaires = aVAServices.getBeneficiaires(beneficiairesPK);
-//        if (beneficiaires == null) {
-//            return new ResponseEntity<Beneficiaires>(HttpStatus.NOT_FOUND);
-//        }
-//        return new ResponseEntity<Beneficiaires>(beneficiaires, HttpStatus.OK);
-//    }
-//
-//    @RequestMapping(value = "/AllBeneficiaires", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-//    public ResponseEntity<List<Beneficiaires>> AllBeneficiaires() {
-//        List<Beneficiaires> beneficiaires = aVAServices.getAllBeneficiaires();
-//        if (beneficiaires.isEmpty()) {
-//            return new ResponseEntity<List<Beneficiaires>>(HttpStatus.NO_CONTENT);
-//        }
-//        return new ResponseEntity<List<Beneficiaires>>(beneficiaires, HttpStatus.OK);
-//    }
-//
-//    // Retrieve single oneOperationsDeleguees
-//    @RequestMapping(value = "/oneOperationsDeleguees", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-//    public ResponseEntity<OperationsDeleguees> oneOperationsDeleguees(@RequestBody OperationsDelegueesPK operationsDelegueesPK) {
-//        OperationsDeleguees operationsDeleguees = aVAServices.getOperationsDeleguees(operationsDelegueesPK);
-//        if (operationsDeleguees == null) {
-//            return new ResponseEntity<OperationsDeleguees>(HttpStatus.NOT_FOUND);
-//        }
-//        return new ResponseEntity<OperationsDeleguees>(operationsDeleguees, HttpStatus.OK);
-//    }
-//
-//    @RequestMapping(value = "/AllOperationsDeleguees", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-//    public ResponseEntity<List<OperationsDeleguees>> AllOperationsDeleguees() {
-//        List<OperationsDeleguees> operationsDelegueeses = aVAServices.getAllOperationsDeleguees();
-//        if (operationsDelegueeses.isEmpty()) {
-//            return new ResponseEntity<List<OperationsDeleguees>>(HttpStatus.NO_CONTENT);
-//        }
-//        return new ResponseEntity<List<OperationsDeleguees>>(operationsDelegueeses, HttpStatus.OK);
-//    }
+
+    @RequestMapping(value = "/AllBeneficiaires", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<Beneficiaires>> AllBeneficiaires() {
+        List<Beneficiaires> beneficiaires = aVAServices.getAllBeneficiaires();
+        if (beneficiaires.isEmpty()) {
+            return new ResponseEntity<List<Beneficiaires>>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<List<Beneficiaires>>(beneficiaires, HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/AllOperationsDeleguees", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<OperationsDeleguees>> AllOperationsDeleguees() {
+        List<OperationsDeleguees> operationsDelegueeses = aVAServices.getAllOperationsDeleguees();
+        if (operationsDelegueeses.isEmpty()) {
+            return new ResponseEntity<List<OperationsDeleguees>>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<List<OperationsDeleguees>>(operationsDelegueeses, HttpStatus.OK);
+    }
 
 }
