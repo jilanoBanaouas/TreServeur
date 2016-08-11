@@ -52,5 +52,6 @@ public interface RefDao {
 
     public List<TypeDossierAva> getAllTypeDossierAva();
     public TypeDossierAva getTypeDossierAva(Short codeTypeDosAva);
+   
 
 }

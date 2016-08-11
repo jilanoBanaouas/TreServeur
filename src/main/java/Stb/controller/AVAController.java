@@ -42,7 +42,7 @@ public class AVAController {
     @Autowired
     AVAServices aVAServices;
 
-    //    Insert BeneficiaresMvt
+    //     Insert BeneficiaresMvt
     @RequestMapping(value = "/insertBeneficairesMvt", method = RequestMethod.POST)
     public ResponseEntity<Void> insertBeneficairesMvt(@RequestBody BeneficiairesMvt beneficiairesMvt) {
         BeneficiairesMvt testExistance = aVAServices.getBeneficiairesMvt(beneficiairesMvt.getBeneficiairesMvtPK());
